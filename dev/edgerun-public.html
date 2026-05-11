@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+<title>edgerun mesh — neonForge</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --panel: #131826;
+    --border: #1f2a44;
+    --text: #c8d4e8;
+    --text-dim: #6b7a99;
+    --accent: #00d9ff;
+    --hub: #ffffff;
+    --c-wifi-own: #00d9ff;
+    --c-wifi-neighbor: #3a6fa8;
+    --c-btle: #ff2dd0;
+    --c-btclassic: #b938ff;
+    --c-lan: #00ff88;
+    --c-usb: #ffaa00;
+    --c-mdns: #ff6600;
+    --c-tailnet: #ff4466;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; height: 100%; width: 100%;
+    background: var(--bg); color: var(--text);
+    font-family: "JetBrains Mono", "Fira Code", "Cascadia Mono", Consolas, monospace;
+    font-size: 12px; overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #app { display: flex; height: 100vh; width: 100vw; position: relative; }
+  #sidebar {
+    width: 280px; min-width: 280px; height: 100%;
+    background: var(--panel); border-right: 1px solid var(--border);
+    padding: 16px; overflow-y: auto;
+    transition: transform 0.22s ease;
+  }
+  #sidebar h1 {
+    font-size: 14px; margin: 0 0 4px 0; color: var(--accent);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  #sidebar .subtitle {
+    font-size: 10px; color: var(--text-dim); margin-bottom: 16px;
+  }
+  #sidebar h2 {
+    font-size: 10px; margin: 16px 0 8px 0; color: var(--text-dim);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    border-bottom: 1px solid var(--border); padding-bottom: 4px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  #sidebar h2 .help-link {
+    color: var(--accent); cursor: pointer; text-decoration: none;
+    font-size: 10px; text-transform: none; letter-spacing: 0;
+  }
+  #sidebar h2 .help-link:hover { text-decoration: underline; }
+  .layer {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px; cursor: pointer; border-radius: 3px;
+    user-select: none;
+  }
+  .layer:hover { background: rgba(255,255,255,0.04); }
+  .layer .swatch {
+    width: 10px; height: 10px; border-radius: 50%;
+    box-shadow: 0 0 6px currentColor;
+  }
+  .layer .label { flex: 1; }
+  .layer .count { color: var(--text-dim); font-size: 10px; }
+  .layer.off { opacity: 0.4; }
+  .layer.off .swatch { box-shadow: none; }
+  #search {
+    width: 100%; background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 8px; font-family: inherit; font-size: 12px;
+    outline: none;
+  }
+  #search:focus { border-color: var(--accent); }
+  #node-details { font-size: 11px; line-height: 1.6; }
+  #node-details .empty { color: var(--text-dim); font-style: italic; }
+  #node-details .row { display: flex; gap: 8px; }
+  #node-details .key { color: var(--text-dim); min-width: 70px; }
+  #node-details .val { color: var(--text); word-break: break-all; }
+  #node-details .name {
+    font-size: 13px; color: var(--accent); margin-bottom: 6px;
+    word-break: break-all;
+  }
+  #file-row { display: flex; gap: 6px; margin-top: 4px; }
+  button.btn {
+    flex: 1; background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 10px 8px; font-family: inherit; font-size: 10px;
+    cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em;
+    -webkit-appearance: none;
+  }
+  button.btn:hover, button.btn:active { border-color: var(--accent); color: var(--accent); }
+  #graph-wrap { flex: 1; position: relative; min-width: 0; }
+  svg { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+  svg:active { cursor: grabbing; }
+  .link { stroke-opacity: 0.35; }
+  .node-circle { cursor: pointer; transition: filter 0.15s; }
+  .node-circle:hover { filter: brightness(1.4); }
+  .node-label {
+    fill: var(--text); font-size: 10px;
+    pointer-events: none;
+    text-shadow: 0 0 4px var(--bg), 0 0 4px var(--bg), 0 0 4px var(--bg);
+  }
+  .hidden { display: none; }
+  .stat-bar {
+    position: absolute; bottom: 8px; left: 8px;
+    background: rgba(19,24,38,0.9); border: 1px solid var(--border);
+    padding: 6px 10px; font-size: 10px; color: var(--text-dim);
+    border-radius: 3px; max-width: calc(100% - 16px);
+  }
+  .stat-bar .accent { color: var(--accent); }
+
+  /* demo badge — visible only when SAMPLE data is loaded */
+  #demo-badge {
+    position: absolute; top: 8px; right: 8px; z-index: 5;
+    background: rgba(255,42,128,0.18); border: 1px solid #ff2d80;
+    color: #ffb8d8; padding: 6px 10px; font-size: 10px;
+    border-radius: 3px; letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  #demo-badge.hidden-badge { display: none; }
+
+  /* hamburger — only on small screens */
+  #menu-btn {
+    display: none;
+    position: absolute; top: 8px; left: 8px; z-index: 11;
+    background: var(--panel); color: var(--accent);
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 8px 12px; cursor: pointer;
+    font-family: inherit; font-size: 16px; line-height: 1;
+  }
+
+  /* help overlay */
+  #help-overlay {
+    position: fixed; inset: 0; z-index: 50;
+    background: rgba(10,14,26,0.92);
+    display: none; padding: 16px; overflow-y: auto;
+  }
+  #help-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+  #help-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 6px; padding: 24px; max-width: 640px; width: 100%;
+    color: var(--text); line-height: 1.55;
+  }
+  #help-card h2 {
+    color: var(--accent); margin: 0 0 12px 0; font-size: 16px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  #help-card h3 {
+    color: var(--text); margin: 18px 0 6px 0; font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  #help-card p, #help-card li { font-size: 12px; }
+  #help-card code {
+    background: var(--bg); border: 1px solid var(--border);
+    padding: 1px 6px; border-radius: 2px; font-size: 11px;
+  }
+  #help-card pre {
+    background: var(--bg); border: 1px solid var(--border);
+    padding: 10px; border-radius: 3px; font-size: 11px;
+    overflow-x: auto; line-height: 1.4;
+  }
+  #help-card a { color: var(--accent); }
+  #help-card .ethics {
+    margin-top: 18px; padding: 10px; border-left: 2px solid var(--c-wifi-own);
+    background: rgba(0,217,255,0.05);
+    color: var(--text-dim); font-size: 11px;
+  }
+  #help-close {
+    background: var(--bg); color: var(--text); border: 1px solid var(--border);
+    border-radius: 3px; padding: 8px 16px; font-family: inherit;
+    cursor: pointer; margin-top: 16px;
+    text-transform: uppercase; letter-spacing: 0.1em; font-size: 11px;
+  }
+  #help-close:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ============== mobile ============== */
+  @media (max-width: 768px) {
+    #sidebar {
+      position: absolute; left: 0; top: 0; z-index: 10;
+      transform: translateX(-100%);
+      box-shadow: 4px 0 20px rgba(0,0,0,0.6);
+      width: 86vw; min-width: 0; max-width: 320px;
+    }
+    #sidebar.open { transform: translateX(0); }
+    #menu-btn { display: block; }
+    #demo-badge { font-size: 9px; padding: 5px 8px; right: 6px; top: 6px; }
+    .stat-bar { font-size: 9px; padding: 5px 8px; }
+    button.btn { padding: 12px 8px; font-size: 11px; }
+    .layer { padding: 8px 6px; }
+    #search { font-size: 14px; padding: 10px; }   /* >=16px on focus prevents iOS zoom */
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <button id="menu-btn" aria-label="toggle sidebar">&#9776;</button>
+  <aside id="sidebar">
+    <h1>edgerun mesh</h1>
+    <div class="subtitle">physical sensor map · drag = grab · release = float</div>
+
+    <h2>layers <a class="help-link" id="help-open">how does this work?</a></h2>
+    <div id="layer-toggles"></div>
+
+    <h2>search</h2>
+    <input id="search" placeholder="filter by name, mac, vendor...">
+
+    <h2>node</h2>
+    <div id="node-details"><div class="empty">click a node</div></div>
+
+    <h2>data</h2>
+    <div id="file-row">
+      <button class="btn" id="load-btn">load mesh.json</button>
+      <button class="btn" id="reset-btn">demo</button>
+    </div>
+    <input type="file" id="file-input" accept=".json,application/json" hidden>
+    <h2>live</h2>
+    <div id="file-row" style="margin-top:4px;">
+      <button class="btn" id="live-btn">fetch live</button>
+      <button class="btn" id="auto-btn">auto: off</button>
+    </div>
+    <div id="live-status" class="temporal-bar" style="margin-top:8px;font-size:10px;color:var(--text-dim);">source: <span id="live-src">none</span></div>
+
+    <h2>timelapse</h2>
+    <div id="timelapse-info" class="temporal-bar" style="margin-top:0;border-top:none;padding-top:0;">
+      <div>scan: <span id="tl-pos" style="color:var(--accent);">—</span> / <span id="tl-total">—</span></div>
+      <div>at: <span id="tl-ts">—</span></div>
+      <div>src: <span id="tl-src">—</span></div>
+    </div>
+    <input id="tl-slider" type="range" min="0" max="0" value="0" style="width:100%;margin-top:8px;accent-color:var(--accent);">
+    <div id="file-row" style="margin-top:6px;">
+      <button class="btn" id="tl-play">▶ play</button>
+      <button class="btn" id="tl-speed">1x</button>
+      <button class="btn" id="tl-refresh">↻</button>
+    </div>
+    <select id="tl-filter" style="width:100%;margin-top:6px;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:3px;padding:6px 8px;font-family:inherit;font-size:11px;">
+      <option value="">all sources</option>
+    </select>
+  </aside>
+
+  <div id="graph-wrap">
+    <svg id="graph"></svg>
+    <div id="demo-badge">demo data · scan your own from mobile</div>
+    <div class="stat-bar">
+      <span class="accent" id="stat-visible">0</span> / <span id="stat-total">0</span> nodes
+      &nbsp;·&nbsp; pinch / scroll to zoom
+    </div>
+  </div>
+</div>
+
+<div id="help-overlay">
+  <div id="help-card">
+    <h2>edgerun mesh</h2>
+    <p>An interactive map of every device a node can see via passive RF and system enumeration. Layers are toggleable so you can flip wifi-neighbors on or off, etc. Drag a node to grab it; release to let it float again.</p>
+
+    <h3>scan from your phone</h3>
+    <p>Termux + termux-api on Android. Output goes to <code>~/storage/downloads/edgerun-mesh.json</code>. Then tap <strong>load mesh.json</strong> in the sidebar and pick the file.</p>
+    <pre>pkg install termux-api python
+termux-setup-storage
+curl -O https://neonforge.untitledprojects.io/media/edgerun-probe.sh
+bash edgerun-probe.sh</pre>
+    <p>You'll need the <strong>Termux:API</strong> companion app installed too (<a href="https://f-droid.org/packages/com.termux.api/" target="_blank" rel="noopener">F-Droid</a>). Mobile probes capture wifi APs around you. Bluetooth scan from Termux is limited; on iOS, no public scan API exists at all — viewer only.</p>
+
+    <h3>scan from a desktop</h3>
+    <p>The PowerShell probe (Windows) covers wifi, bluetooth (paired), LAN ARP table, USB, and tailnet peers. Reach out to the artificer if you want it.</p>
+
+    <div class="ethics">
+      <strong>ethics line.</strong> Passive RF observation in public is the same thing wifi-survey apps do. This tool does not aggregate, upload, or share scans &mdash; everything stays on your device. Don't pair MACs to people. Don't probe networks. Don't scan in private spaces where you wouldn't be welcome doing it openly. Listen, never poke.
+    </div>
+
+    <button id="help-close">close</button>
+  </div>
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+// -------- sample / demo data --------
+const SAMPLE = {
+  generated: "demo",
+  hub: { id: "demo-hub", label: "demo node", note: "sample data — load your own mesh.json to see real scan" },
+  nodes: [
+    { id: "ap-own", label: "your-network", medium: "wifi-own", rssi: -42, channel: 36, bssid: "aa:bb:cc:11:22:33" },
+
+    { id: "ap-n1", label: "neighbor-AP-A", medium: "wifi-neighbor", rssi: -68, channel: 6 },
+    { id: "ap-n2", label: "neighbor-AP-B", medium: "wifi-neighbor", rssi: -72, channel: 11 },
+    { id: "ap-n3", label: "neighbor-AP-C", medium: "wifi-neighbor", rssi: -75, channel: 149 },
+    { id: "ap-n4", label: "neighbor-AP-D", medium: "wifi-neighbor", rssi: -78, channel: 1 },
+    { id: "ap-n5", label: "neighbor-AP-E", medium: "wifi-neighbor", rssi: -81, channel: 6 },
+    { id: "ap-n6", label: "<hidden>",      medium: "wifi-neighbor", rssi: -83, channel: 11 },
+    { id: "ap-n7", label: "neighbor-AP-G", medium: "wifi-neighbor", rssi: -84, channel: 36 },
+    { id: "ap-n8", label: "phone-hotspot",  medium: "wifi-neighbor", rssi: -65, channel: 6 },
+    { id: "ap-n9", label: "neighbor-AP-I", medium: "wifi-neighbor", rssi: -86, channel: 1 },
+    { id: "ap-n10", label: "neighbor-AP-J", medium: "wifi-neighbor", rssi: -88, channel: 11 },
+
+    { id: "btle-1", label: "phone (BLE)", medium: "btle", rssi: -55 },
+    { id: "btle-2", label: "earbuds",     medium: "btle", rssi: -48 },
+    { id: "btle-3", label: "fitness band", medium: "btle", rssi: -62 },
+    { id: "btle-4", label: "tracker tile", medium: "btle", rssi: -71 },
+    { id: "btle-5", label: "<unnamed beacon>", medium: "btle", rssi: -82 },
+
+    { id: "bt-1", label: "wireless mouse",    medium: "btclassic", profile: "HID" },
+    { id: "bt-2", label: "wireless keyboard", medium: "btclassic", profile: "HID" },
+    { id: "bt-3", label: "headphones",        medium: "btclassic", profile: "A2DP" },
+
+    { id: "lan-router",  label: "router",       medium: "lan", ip: "192.168.x.1" },
+    { id: "lan-printer", label: "printer",      medium: "lan", ip: "192.168.x.21" },
+    { id: "lan-cast",    label: "cast device",  medium: "lan", ip: "192.168.x.45" },
+    { id: "lan-bulb1",   label: "smart bulb 1", medium: "lan", ip: "192.168.x.62" },
+    { id: "lan-bulb2",   label: "smart bulb 2", medium: "lan", ip: "192.168.x.63" },
+
+    { id: "usb-hub",   label: "USB hub",        medium: "usb" },
+    { id: "usb-kb",    label: "keyboard (USB)", medium: "usb" },
+    { id: "usb-mouse", label: "mouse (USB)",    medium: "usb" },
+    { id: "usb-yubi",  label: "security key",   medium: "usb" },
+
+    { id: "tail-a",  label: "ec2-host",   medium: "tailnet", ip: "100.x.x.10" },
+    { id: "tail-b",  label: "gpu-host",   medium: "tailnet", ip: "100.x.x.11" },
+    { id: "tail-c",  label: "phone",      medium: "tailnet", ip: "100.x.x.12" },
+  ],
+};
+
+// -------- layer config --------
+const LAYERS = [
+  { id: "wifi-own",      label: "Wi-Fi (own)",       colorHex: "#00d9ff", on: true },
+  { id: "wifi-neighbor", label: "Wi-Fi (neighbors)", colorHex: "#3a6fa8", on: false },
+  { id: "btle",          label: "Bluetooth LE",      colorHex: "#ff2dd0", on: true },
+  { id: "btclassic",     label: "Bluetooth (paired)",colorHex: "#b938ff", on: true },
+  { id: "lan",           label: "LAN hosts",         colorHex: "#00ff88", on: true },
+  { id: "usb",           label: "USB / PnP",         colorHex: "#ffaa00", on: true },
+  { id: "mdns",          label: "mDNS / SSDP",       colorHex: "#ff6600", on: true },
+  { id: "tailnet",       label: "Tailnet (logical)", colorHex: "#ff4466", on: true },
+];
+const layerState = {};
+LAYERS.forEach(l => layerState[l.id] = l.on);
+
+// -------- state --------
+let DATA = SAMPLE;
+let isDemo = true;
+let svg, g, sim;
+let nodeSel, linkSel, labelSel;
+let allNodes = [], allLinks = [];
+let searchTerm = "";
+
+function init() {
+  svg = d3.select("#graph");
+  const wrap = document.getElementById("graph-wrap");
+  const w = wrap.clientWidth, h = wrap.clientHeight;
+  svg.attr("viewBox", [-w/2, -h/2, w, h]);
+  g = svg.append("g");
+
+  const zoom = d3.zoom()
+    .scaleExtent([0.2, 5])
+    .on("zoom", (e) => g.attr("transform", e.transform));
+  svg.call(zoom);
+
+  const defs = svg.append("defs");
+  const filter = defs.append("filter").attr("id", "glow")
+    .attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
+  filter.append("feGaussianBlur").attr("stdDeviation", "2.5").attr("result", "coloredBlur");
+  const merge = filter.append("feMerge");
+  merge.append("feMergeNode").attr("in", "coloredBlur");
+  merge.append("feMergeNode").attr("in", "SourceGraphic");
+
+  buildLayerToggles();
+  buildGraph();
+  updateBadges();
+
+  window.addEventListener("resize", () => {
+    const w2 = wrap.clientWidth, h2 = wrap.clientHeight;
+    svg.attr("viewBox", [-w2/2, -h2/2, w2, h2]);
+    if (sim) sim.force("center", d3.forceCenter(0, 0)).alpha(0.3).restart();
+  });
+}
+
+function buildLayerToggles() {
+  const counts = {};
+  LAYERS.forEach(l => counts[l.id] = 0);
+  DATA.nodes.forEach(n => { if (counts[n.medium] !== undefined) counts[n.medium]++; });
+
+  const host = d3.select("#layer-toggles");
+  host.selectAll("*").remove();
+  LAYERS.forEach(l => {
+    const row = host.append("div")
+      .attr("class", "layer" + (layerState[l.id] ? "" : " off"))
+      .on("click", function() {
+        layerState[l.id] = !layerState[l.id];
+        d3.select(this).classed("off", !layerState[l.id]);
+        applyVisibility();
+      });
+    row.append("div").attr("class", "swatch")
+      .style("background", l.colorHex).style("color", l.colorHex);
+    row.append("div").attr("class", "label").text(l.label);
+    row.append("div").attr("class", "count").text(counts[l.id] || 0);
+  });
+}
+
+function buildGraph() {
+  const hub = { ...DATA.hub, medium: "hub", _hub: true };
+  allNodes = [hub, ...DATA.nodes];
+  allLinks = DATA.nodes.map(n => ({ source: hub.id, target: n.id, medium: n.medium }));
+  if (sim) sim.stop();
+
+  linkSel = g.append("g").attr("class", "links")
+    .selectAll("line").data(allLinks).enter().append("line")
+    .attr("class", d => "link link-" + d.medium)
+    .attr("stroke", d => colorFor(d.medium))
+    .attr("stroke-width", 1);
+
+  const nodeG = g.append("g").attr("class", "nodes")
+    .selectAll("g").data(allNodes).enter().append("g")
+    .attr("class", d => "node node-" + d.medium)
+    .call(d3.drag().on("start", dragStart).on("drag", dragMove).on("end", dragEnd));
+
+  nodeSel = nodeG.append("circle")
+    .attr("class", "node-circle")
+    .attr("r", d => radiusFor(d))
+    .attr("fill", d => colorFor(d.medium))
+    .attr("stroke", d => d._hub ? "#ffffff" : "rgba(255,255,255,0.15)")
+    .attr("stroke-width", d => d._hub ? 2 : 0.5)
+    .attr("filter", "url(#glow)")
+    .on("click", (e, d) => showDetails(d));
+
+  labelSel = nodeG.append("text")
+    .attr("class", "node-label")
+    .attr("dx", d => radiusFor(d) + 4)
+    .attr("dy", "0.35em")
+    .text(d => d.label || d.id);
+
+  sim = d3.forceSimulation(allNodes)
+    .force("link", d3.forceLink(allLinks).id(d => d.id).distance(d => linkDistanceFor(d)).strength(0.4))
+    .force("charge", d3.forceManyBody().strength(d => d._hub ? -800 : -180))
+    .force("center", d3.forceCenter(0, 0).strength(0.05))
+    .force("collide", d3.forceCollide().radius(d => radiusFor(d) + 8))
+    .alphaDecay(0.015)
+    .velocityDecay(0.45)
+    .on("tick", tick);
+
+  applyVisibility();
+}
+
+function tick() {
+  linkSel
+    .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+    .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+  d3.selectAll(".node").attr("transform", d => `translate(${d.x},${d.y})`);
+}
+
+function radiusFor(n) {
+  if (n._hub) return 18;
+  if (typeof n.rssi === "number") {
+    const v = Math.max(-90, Math.min(-30, n.rssi));
+    return 4 + ((-30 - v) / -60) * 6 + 6;
+  }
+  return 7;
+}
+
+function linkDistanceFor(l) {
+  const t = l.target;
+  if (typeof t.rssi === "number") {
+    const v = Math.max(-90, Math.min(-30, t.rssi));
+    return 50 + ((v + 30) / -60) * 180;
+  }
+  const map = { usb: 70, "btclassic": 90, lan: 110, mdns: 130, btle: 140, tailnet: 200 };
+  return map[l.medium] || 110;
+}
+
+function colorFor(medium) {
+  if (medium === "hub") return "#ffffff";
+  const l = LAYERS.find(x => x.id === medium);
+  return l ? l.colorHex : "#888";
+}
+
+function applyVisibility() {
+  const term = searchTerm.trim().toLowerCase();
+  let visible = 0;
+  d3.selectAll(".node").each(function(d) {
+    const layerOn = d._hub || layerState[d.medium];
+    let match = true;
+    if (term && !d._hub) {
+      const hay = JSON.stringify(d).toLowerCase();
+      match = hay.includes(term);
+    }
+    const show = layerOn && match;
+    d3.select(this).classed("hidden", !show);
+    if (show && !d._hub) visible++;
+  });
+  d3.selectAll(".link").each(function(d) {
+    const targetVisible = d.target._hub || layerState[d.target.medium];
+    let match = true;
+    if (term) {
+      const hay = JSON.stringify(d.target).toLowerCase();
+      match = hay.includes(term);
+    }
+    d3.select(this).classed("hidden", !(targetVisible && match));
+  });
+  document.getElementById("stat-visible").textContent = visible;
+  document.getElementById("stat-total").textContent = allNodes.length - 1;
+  if (sim) sim.alpha(0.3).restart();
+}
+
+function showDetails(d) {
+  const host = d3.select("#node-details");
+  host.selectAll("*").remove();
+  host.append("div").attr("class", "name").text(d.label || d.id);
+  host.append("div").attr("class", "row")
+    .call(div => { div.append("div").attr("class","key").text("medium"); div.append("div").attr("class","val").text(d.medium); });
+  Object.entries(d).forEach(([k, v]) => {
+    if (["id","label","medium","x","y","vx","vy","fx","fy","index","_hub","note"].includes(k)) return;
+    if (v === null || v === undefined) return;
+    host.append("div").attr("class", "row")
+      .call(div => {
+        div.append("div").attr("class","key").text(k);
+        div.append("div").attr("class","val").text(String(v));
+      });
+  });
+  if (d.note) {
+    host.append("div").style("margin-top","8px").style("color","var(--text-dim)").style("font-style","italic").text(d.note);
+  }
+  // close sidebar after node tap on mobile
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    document.getElementById("sidebar").classList.remove("open");
+  }
+}
+
+function updateBadges() {
+  document.getElementById("demo-badge").classList.toggle("hidden-badge", !isDemo);
+}
+
+function dragStart(e, d) {
+  if (!e.active) sim.alphaTarget(0.3).restart();
+  d.fx = d.x; d.fy = d.y;
+}
+function dragMove(e, d) { d.fx = e.x; d.fy = e.y; }
+function dragEnd(e, d) {
+  if (!e.active) sim.alphaTarget(0);
+  d.fx = null; d.fy = null;
+}
+
+// -------- file load --------
+document.getElementById("load-btn").addEventListener("click", () => {
+  document.getElementById("file-input").click();
+});
+document.getElementById("file-input").addEventListener("change", (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const j = JSON.parse(r.result);
+      if (!j.hub || !Array.isArray(j.nodes)) throw new Error("missing hub or nodes[]");
+      DATA = j;
+      isDemo = false;
+      g.selectAll("*").remove();
+      buildGraph();
+      buildLayerToggles();
+      updateBadges();
+    } catch (err) {
+      alert("invalid mesh.json: " + err.message);
+    }
+  };
+  r.readAsText(f);
+});
+document.getElementById("reset-btn").addEventListener("click", () => {
+  DATA = SAMPLE;
+  isDemo = true;
+  g.selectAll("*").remove();
+  buildGraph();
+  buildLayerToggles();
+  updateBadges();
+});
+
+// -------- search --------
+document.getElementById("search").addEventListener("input", (e) => {
+  searchTerm = e.target.value;
+  applyVisibility();
+});
+
+// -------- mobile sidebar toggle --------
+document.getElementById("menu-btn").addEventListener("click", () => {
+  document.getElementById("sidebar").classList.toggle("open");
+});
+
+// -------- LIVE SYNC — fetch from neonforge --------
+const LIVE_URL = "/edgerun/latest.json";
+let autoTimer = null;
+
+async function fetchLive() {
+  try {
+    const r = await fetch(LIVE_URL, { cache: "no-cache" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const j = await r.json();
+    if (!j.hub || !Array.isArray(j.nodes)) throw new Error("invalid mesh");
+    DATA = j;
+    isDemo = false;
+    g.selectAll("*").remove();
+    buildGraph();
+    buildLayerToggles();
+    updateBadges();
+    const src = j.hub && j.hub.label ? j.hub.label : (j.source_ip || "?");
+    const ts = j.received || j.generated || "?";
+    document.getElementById("live-src").textContent = src + " · " + ts;
+    return true;
+  } catch (e) {
+    console.warn("live fetch failed:", e);
+    document.getElementById("live-src").textContent = "fetch failed: " + e.message;
+    return false;
+  }
+}
+
+document.getElementById("live-btn").addEventListener("click", fetchLive);
+
+document.getElementById("auto-btn").addEventListener("click", function() {
+  if (autoTimer) {
+    clearInterval(autoTimer);
+    autoTimer = null;
+    this.textContent = "auto: off";
+  } else {
+    fetchLive();
+    autoTimer = setInterval(fetchLive, 30000);
+    this.textContent = "auto: 30s";
+  }
+});
+
+// auto-fetch on load — fall back to SAMPLE if it fails (already loaded)
+fetchLive();
+
+// -------- TIMELAPSE — scrub through historical scans --------
+const INDEX_URL = "/edgerun/index.json";
+const SCAN_URL  = (id) => `/edgerun/scans/${id}.json`;
+
+let scanIndex = [];        // full index (filtered by source if active)
+let scanIndexAll = [];     // unfiltered, for repopulating filter
+let currentScanIdx = 0;
+let scanCache = {};        // id -> mesh json
+let playTimer = null;
+const SPEEDS = [3000, 1500, 750, 375];   // ms per frame · 0.5x / 1x / 2x / 4x
+const SPEED_LABELS = ["0.5x","1x","2x","4x"];
+let speedIdx = 1;
+
+async function fetchIndex() {
+  try {
+    const r = await fetch(INDEX_URL, { cache: "no-cache" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    let idx = await r.json();
+    // sort oldest → newest so slider goes left=past, right=present
+    idx.sort((a, b) => (a.received || "").localeCompare(b.received || ""));
+    scanIndexAll = idx;
+    populateFilter();
+    applyFilter();
+  } catch (e) {
+    console.warn("index fetch failed:", e);
+    document.getElementById("tl-total").textContent = "0";
+  }
+}
+
+function populateFilter() {
+  const sel = document.getElementById("tl-filter");
+  const cur = sel.value;
+  const sources = [...new Set(scanIndexAll.map(s => s.source_ip).filter(Boolean))];
+  sel.innerHTML = '<option value="">all sources (' + scanIndexAll.length + ')</option>';
+  sources.forEach(ip => {
+    const count = scanIndexAll.filter(s => s.source_ip === ip).length;
+    const opt = document.createElement("option");
+    opt.value = ip;
+    opt.textContent = `${ip} (${count})`;
+    sel.appendChild(opt);
+  });
+  if (cur && sources.includes(cur)) sel.value = cur;
+}
+
+function applyFilter() {
+  const ip = document.getElementById("tl-filter").value;
+  scanIndex = ip ? scanIndexAll.filter(s => s.source_ip === ip) : scanIndexAll.slice();
+  const slider = document.getElementById("tl-slider");
+  slider.max = Math.max(0, scanIndex.length - 1);
+  slider.value = scanIndex.length - 1;   // default to most recent
+  document.getElementById("tl-total").textContent = scanIndex.length;
+  if (scanIndex.length > 0) {
+    showScanAt(scanIndex.length - 1);
+  } else {
+    document.getElementById("tl-pos").textContent = "—";
+    document.getElementById("tl-ts").textContent = "—";
+    document.getElementById("tl-src").textContent = "—";
+  }
+}
+
+async function loadScan(id) {
+  if (scanCache[id]) return scanCache[id];
+  try {
+    const r = await fetch(SCAN_URL(id), { cache: "force-cache" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const j = await r.json();
+    scanCache[id] = j;
+    return j;
+  } catch (e) {
+    console.warn("scan fetch failed:", id, e);
+    return null;
+  }
+}
+
+async function showScanAt(idx) {
+  if (idx < 0 || idx >= scanIndex.length) return;
+  currentScanIdx = idx;
+  const meta = scanIndex[idx];
+  document.getElementById("tl-pos").textContent = (idx + 1);
+  document.getElementById("tl-ts").textContent = meta.received || "?";
+  document.getElementById("tl-src").textContent = meta.source_ip || "?";
+  document.getElementById("tl-slider").value = idx;
+  const scan = await loadScan(meta.id);
+  if (!scan) return;
+  DATA = scan;
+  isDemo = false;
+  g.selectAll("*").remove();
+  buildGraph();
+  buildLayerToggles();
+  updateBadges();
+}
+
+function playLapse() {
+  const btn = document.getElementById("tl-play");
+  if (playTimer) {
+    clearInterval(playTimer);
+    playTimer = null;
+    btn.textContent = "▶ play";
+    return;
+  }
+  btn.textContent = "❚❚ pause";
+  // if at end, restart from beginning
+  if (currentScanIdx >= scanIndex.length - 1) currentScanIdx = -1;
+  playTimer = setInterval(() => {
+    if (currentScanIdx >= scanIndex.length - 1) {
+      clearInterval(playTimer);
+      playTimer = null;
+      btn.textContent = "▶ play";
+      return;
+    }
+    showScanAt(currentScanIdx + 1);
+  }, SPEEDS[speedIdx]);
+}
+
+document.getElementById("tl-slider").addEventListener("input", (e) => {
+  showScanAt(parseInt(e.target.value, 10));
+});
+document.getElementById("tl-play").addEventListener("click", playLapse);
+document.getElementById("tl-speed").addEventListener("click", function() {
+  speedIdx = (speedIdx + 1) % SPEEDS.length;
+  this.textContent = SPEED_LABELS[speedIdx];
+  if (playTimer) {  // restart at new speed
+    clearInterval(playTimer);
+    playTimer = null;
+    document.getElementById("tl-play").textContent = "▶ play";
+    playLapse();
+  }
+});
+document.getElementById("tl-refresh").addEventListener("click", fetchIndex);
+document.getElementById("tl-filter").addEventListener("change", applyFilter);
+
+// load index on boot
+fetchIndex();
+
+// -------- help overlay --------
+const help = document.getElementById("help-overlay");
+document.getElementById("help-open").addEventListener("click", (e) => { e.preventDefault(); help.classList.add("open"); });
+document.getElementById("help-close").addEventListener("click", () => help.classList.remove("open"));
+help.addEventListener("click", (e) => { if (e.target === help) help.classList.remove("open"); });
+
+init();
+</script>
+</body>
+</html>
