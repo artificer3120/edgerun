@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>edgerun mesh — neonForge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0a0a0a; color: #ccc;
+    font-family: 'Courier New', monospace;
+    padding: 20px; line-height: 1.55; font-size: 13px;
+    max-width: 980px; margin: 0 auto;
+  }
+  .head {
+    border: 2px solid #ff6600; border-radius: 6px;
+    padding: 16px 20px; margin-bottom: 20px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .brand { color: #ff6600; font-weight: bold; font-size: 22px; letter-spacing: 0.05em; }
+  .tagline { color: #666; font-size: 12px; }
+  .tagline span { color: #00ff41; }
+  a { color: #00ff41; }
+  a:hover { color: #ff6600; }
+  h2 {
+    color: #ff6600; font-size: 14px; text-transform: uppercase;
+    letter-spacing: 0.15em; margin: 28px 0 10px 0;
+    padding-bottom: 6px; border-bottom: 1px solid #1a1a1a;
+  }
+  h3 {
+    color: #00ff41; font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.1em; margin: 18px 0 6px 0;
+  }
+  p { margin: 8px 0; color: #aaa; }
+  p strong { color: #ccc; }
+  ul { margin: 8px 0 8px 22px; color: #aaa; }
+  li { margin: 4px 0; }
+  code {
+    background: #111; border: 1px solid #222; border-radius: 2px;
+    padding: 1px 6px; color: #00ff41; font-size: 12px;
+  }
+  pre {
+    background: #111; border: 1px solid #222; border-radius: 4px;
+    padding: 12px 14px; color: #ccc; font-size: 12px;
+    overflow-x: auto; line-height: 1.5; margin: 8px 0;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+  .panel {
+    background: #0d0d0d; border: 1px solid #222; border-left: 3px solid var(--accent, #00ff41);
+    padding: 12px 14px; border-radius: 3px;
+  }
+  .layers-table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+  .layers-table td, .layers-table th {
+    padding: 6px 10px; border-bottom: 1px solid #1a1a1a;
+    text-align: left; font-size: 12px;
+  }
+  .layers-table th { color: #666; font-weight: normal; text-transform: uppercase; letter-spacing: 0.08em; font-size: 10px; }
+  .layers-table .swatch {
+    display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+    margin-right: 8px; vertical-align: middle; box-shadow: 0 0 6px currentColor;
+  }
+  .ethics {
+    background: #0d0d0d; border-left: 3px solid #00ff41;
+    padding: 14px 18px; margin: 16px 0;
+    color: #aaa; font-size: 12px;
+  }
+  .ethics strong { color: #00ff41; }
+
+  /* embed */
+  .embed-wrap {
+    position: relative;
+    border: 1px solid #222; border-radius: 6px; overflow: hidden;
+    margin: 12px 0; background: #0a0e1a;
+  }
+  .embed-wrap iframe {
+    width: 100%; height: 600px; border: 0; display: block;
+  }
+  .embed-actions {
+    background: #0d0d0d; border-top: 1px solid #1a1a1a;
+    padding: 8px 14px; display: flex; gap: 16px; align-items: center;
+    font-size: 11px; color: #666; flex-wrap: wrap;
+  }
+  .embed-actions a {
+    color: #00ff41; text-decoration: none; padding: 4px 10px;
+    border: 1px solid #1a1a1a; border-radius: 3px; transition: border-color 0.1s;
+  }
+  .embed-actions a:hover { border-color: #ff6600; color: #ff6600; }
+  .embed-actions .live-badge {
+    color: #ff6600; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; font-size: 10px;
+  }
+
+  .footer {
+    margin-top: 40px; padding-top: 16px;
+    border-top: 1px solid #1a1a1a;
+    text-align: center; color: #444; font-size: 11px;
+  }
+  .footer a { color: #555; text-decoration: none; }
+  .footer a:hover { color: #ff6600; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <div class="brand">// edgerun mesh</div>
+    <div class="tagline">physical sensor recon · <span>discover</span> what's around you</div>
+  </div>
+  <div class="tagline">v1.0 · 2026-05-10</div>
+</div>
+
+<p>
+  <strong>edgerun</strong> is a passive RF + system-enumeration probe and a d3-force interactive viewer.
+  It maps everything a node can see &mdash; nearby Wi-Fi APs, paired Bluetooth peripherals, LAN hosts on the same subnet,
+  USB devices, and (on a tailnet member) logical mesh peers &mdash; into a floating nodal graph that responds to drag,
+  release, search, and layer-toggle.
+</p>
+
+<p>
+  The viewer runs entirely client-side. No scan data is uploaded, aggregated, or shared. Your scans stay on your device.
+</p>
+
+<a href="?p=edgerun-app" target="_blank" rel="noopener" style="display:inline-block;background:#ff6600;color:#0a0a0a;padding:10px 18px;font-weight:bold;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;border-radius:3px;margin-top:8px;">▶ open the live utility</a>
+
+<h2>live preview</h2>
+<p>The full utility is embedded below &mdash; touch / drag a node to grab it, release to let it float, scroll to zoom, sidebar to toggle layers. By default it shows demo data; load your own <code>mesh.json</code> via the sidebar.</p>
+
+<div class="embed-wrap">
+  <iframe src="?p=edgerun-app" title="edgerun viewer" loading="lazy"></iframe>
+  <div class="embed-actions">
+    <span class="live-badge">live</span>
+    <a href="?p=edgerun-app" target="_blank" rel="noopener">open in fullscreen ↗</a>
+    <a href="/media/edgerun-probe.sh" download>download termux probe</a>
+  </div>
+</div>
+
+<h2>layers</h2>
+<table class="layers-table">
+  <tr><th>layer</th><th>source</th><th>notes</th></tr>
+  <tr><td><span class="swatch" style="color:#00d9ff;background:#00d9ff"></span>Wi-Fi (own)</td><td>active connection</td><td>the AP you're connected to</td></tr>
+  <tr><td><span class="swatch" style="color:#3a6fa8;background:#3a6fa8"></span>Wi-Fi (neighbors)</td><td>WlanScan + netsh / termux-wifi-scaninfo</td><td>off by default — toggle to reveal</td></tr>
+  <tr><td><span class="swatch" style="color:#ff2dd0;background:#ff2dd0"></span>Bluetooth LE</td><td>WinRT (planned), termux-bluetooth-scaninfo (limited)</td><td>v1: paired only on Windows</td></tr>
+  <tr><td><span class="swatch" style="color:#b938ff;background:#b938ff"></span>Bluetooth (paired)</td><td>Get-PnpDevice -Class Bluetooth</td><td>cached/paired peripherals</td></tr>
+  <tr><td><span class="swatch" style="color:#00ff88;background:#00ff88"></span>LAN hosts</td><td>Get-NetNeighbor (default-route iface)</td><td>ARP/neighbor table</td></tr>
+  <tr><td><span class="swatch" style="color:#ffaa00;background:#ffaa00"></span>USB / PnP</td><td>Get-PnpDevice (VID/PID)</td><td>hubs, composites filtered</td></tr>
+  <tr><td><span class="swatch" style="color:#ff6600;background:#ff6600"></span>mDNS / SSDP</td><td>(planned)</td><td>service discovery — not in v1</td></tr>
+  <tr><td><span class="swatch" style="color:#ff4466;background:#ff4466"></span>Tailnet (logical)</td><td>tailscale status --json</td><td>logical mesh, not physical</td></tr>
+</table>
+
+<h2>scanning</h2>
+
+<div class="grid-2">
+  <div class="panel" style="--accent:#00ff41">
+    <h3>from your phone (Android)</h3>
+    <p>Termux + termux-api. Output goes to <code>~/storage/downloads/edgerun-mesh.json</code>.</p>
+    <pre>pkg install termux-api python
+termux-setup-storage
+curl -O https://neonforge.untitledprojects.io/media/edgerun-probe.sh
+bash edgerun-probe.sh</pre>
+    <p>Install the <strong>Termux:API</strong> companion from <a href="https://f-droid.org/packages/com.termux.api/" target="_blank" rel="noopener">F-Droid</a> (not Play Store). Then in the viewer, tap <strong>load mesh.json</strong> and pick the file from Downloads.</p>
+  </div>
+
+  <div class="panel" style="--accent:#ff6600">
+    <h3>from a desktop (Windows)</h3>
+    <p>PowerShell probe with full coverage: Wi-Fi (active scan via WlanScan P/Invoke), Bluetooth paired, LAN ARP, USB, tailnet.</p>
+    <pre>& "$probe\probe-mesh.ps1"
+# emits mesh.json + mesh-data.js
+# viewer auto-loads mesh-data.js if present</pre>
+    <p>Source lives in <code>.artificer/.soundings/edgerun-mesh-map/</code>. Reach out to the artificer for the script.</p>
+  </div>
+
+  <div class="panel" style="--accent:#666">
+    <h3>from iOS</h3>
+    <p>Not supported. iOS does not expose any public Wi-Fi or BT scan API. The viewer works fine on iPad/iPhone &mdash; just import a <code>mesh.json</code> generated elsewhere.</p>
+  </div>
+
+  <div class="panel" style="--accent:#666">
+    <h3>schema</h3>
+    <p>The viewer accepts any JSON of shape:</p>
+    <pre>{
+  "generated": "2026-05-10T05:00:00Z",
+  "hub": { "id": "...", "label": "...", "note": "..." },
+  "nodes": [
+    { "id": "...", "label": "...", "medium": "wifi-own | wifi-neighbor | btle | btclassic | lan | usb | mdns | tailnet", "rssi": -50, ... }
+  ]
+}</pre>
+  </div>
+</div>
+
+<h2>ethics</h2>
+<div class="ethics">
+  <p><strong>Listen, never poke.</strong> Wi-Fi beacons and BT advertisements are broadcast frames &mdash; passive observation is what every wifi-survey app does and is legal in public. The harm comes from what you do with the data, not the act of listening.</p>
+  <p style="margin-top:10px;">Lines this project holds, and you should too:</p>
+  <ul>
+    <li>No aggregation upload &mdash; never push to wigle, never publish other people's BSSIDs/MACs alongside identifying info.</li>
+    <li>No GPS pairing &mdash; observation only, no location-tagged history.</li>
+    <li>No probing or attack &mdash; don't try to access discovered networks; don't fingerprint people across observations.</li>
+    <li>Respect of context &mdash; fine in public, weird in someone's home you're a guest in.</li>
+  </ul>
+  <p style="margin-top:10px;">The hosted viewer ships with sample data only. The Termux probe writes to your device's Downloads &mdash; nothing is sent anywhere.</p>
+</div>
+
+<h2>known gaps (v1)</h2>
+<ul>
+  <li><strong>Live BLE scan on Windows</strong> &mdash; needs WinRT <code>BluetoothLEAdvertisementWatcher</code>. Paired/cached only for now.</li>
+  <li><strong>mDNS / SSDP</strong> &mdash; no native Windows CLI; deferred. Termux can do it via avahi-utils if installed.</li>
+  <li><strong>NFC</strong> &mdash; needs reader hardware on Rocky.</li>
+  <li><strong>iOS scanning</strong> &mdash; blocked by platform.</li>
+</ul>
+
+<h2>credits</h2>
+<p>Built by <strong>ork3120</strong> (recon) under the artificer's edgerun directive, 2026-05-10. Filed in soundings <code>.artificer/.soundings/edgerun-mesh-map/</code>.</p>
+
+<div class="footer">
+  <a href="/">← back to neonForge</a>
+</div>
+
+</body>
+</html>

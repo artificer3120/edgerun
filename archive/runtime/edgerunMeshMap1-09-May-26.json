@@ -1,0 +1,116 @@
+{
+  "title": "edgerun-mesh-map · physical sensor recon on rocky",
+  "nodes": [
+    {
+      "id": "req",
+      "title": "operator request",
+      "subtitle": "edgerun all hardware sensors on rocky → nodal map",
+      "status": "complete",
+      "userTurn": true,
+      "description": "Map every device discoverable from Rocky via physical sensors (wifi, bt, nfc, anything). Layer wifi neighbors as toggleable. Visualize as floating nodal graph (Obsidian-style)."
+    },
+    {
+      "id": "scope",
+      "title": "scope sensors",
+      "subtitle": "inventory what Rocky can actually probe",
+      "status": "complete",
+      "description": "Confirmed: wifi (netsh+WlanScan), BT paired (PnP), LAN (NetNeighbor), USB (PnP). Skipped: live BLE (needs WinRT), mDNS/SSDP (no native CLI), NFC (no reader)."
+    },
+    {
+      "id": "viz-pick",
+      "title": "pick visualization",
+      "subtitle": "d3-force over cytoscape — Obsidian feel",
+      "status": "complete",
+      "tool": "d3.js v7",
+      "description": "processFlow rejected: static. cytoscape rejected: settles. d3-force = continuous physics, drag-to-grab/release-to-float."
+    },
+    {
+      "id": "viewer",
+      "title": "build mesh-viewer.html",
+      "subtitle": "single-file, dark cyberpunk, layer toggles, click-for-meta",
+      "status": "complete",
+      "tool": "d3-force + zoom + drag",
+      "actualStack": ["html", "css", "d3.js v7"],
+      "description": "Sidebar layer toggles (wifi-neighbor off by default), search filter, force simulation with low alphaDecay so nodes keep gentle motion, glow filter on circles."
+    },
+    {
+      "id": "probe-wifi",
+      "title": "probe — wifi",
+      "subtitle": "WlanScan via P/Invoke + netsh parse",
+      "status": "complete",
+      "tool": "wlanapi.dll + netsh",
+      "description": "WlanOpenHandle → WlanEnumInterfaces → WlanScan per iface → 4s wait → netsh wlan show networks mode=bssid. Parses SSID/BSSID/signal%/channel/radio per AP."
+    },
+    {
+      "id": "probe-bt",
+      "title": "probe — bluetooth",
+      "subtitle": "Get-PnpDevice -Class Bluetooth",
+      "status": "complete",
+      "tool": "PowerShell PnP",
+      "description": "Paired/cached devices only. Live BLE scan deferred (needs WinRT BluetoothLEAdvertisementWatcher)."
+    },
+    {
+      "id": "probe-lan",
+      "title": "probe — LAN",
+      "subtitle": "Get-NetNeighbor + default route filter",
+      "status": "complete",
+      "tool": "Get-NetNeighbor",
+      "description": "ARP/neighbor table, filtered to default-route interface, excludes multicast/link-local."
+    },
+    {
+      "id": "probe-usb",
+      "title": "probe — USB",
+      "subtitle": "Get-PnpDevice VID/PID parse",
+      "status": "complete",
+      "tool": "PowerShell PnP",
+      "description": "Filters out hubs/composites/roots. Parses VID and PID from InstanceId."
+    },
+    {
+      "id": "emit",
+      "title": "emit mesh.json + mesh-data.js",
+      "subtitle": "UTF-8 no BOM, baked script tag for file:// auto-load",
+      "status": "complete",
+      "description": "viewer can't fetch() over file://, so probe also writes mesh-data.js setting window.MESH_DATA. Viewer prefers it over SAMPLE."
+    },
+    {
+      "id": "munch",
+      "title": "munch viewer",
+      "subtitle": "opera-pocket, ork profile, surfaced to ork's display",
+      "status": "complete",
+      "tool": "opera-muncher --nomen ork",
+      "description": "Frameless Qt host, per-nomen QWebEngineProfile, lands on the ork-tagged WT virtual desktop."
+    },
+    {
+      "id": "picass0",
+      "title": "picass0 — ork watching bots",
+      "subtitle": "GPU wake + render in parallel",
+      "status": "complete",
+      "tool": "ComfyUI on g4dn.xlarge",
+      "description": "Twink shadowrunner Nick Robinson, cybernetic implants, leaning back at a wall of holo-displays with spider-drone bots scuttling across."
+    },
+    {
+      "id": "ship",
+      "title": "ship",
+      "subtitle": "33 nodes mapped · viewer + image on screen · manifest updated",
+      "status": "complete",
+      "description": "filed at .artificer/.soundings/edgerun-mesh-map/. Probe is re-runnable — refresh anytime to update the graph."
+    }
+  ],
+  "edges": [
+    { "source": "req",        "target": "scope",      "label": "thoughts?" },
+    { "source": "scope",      "target": "viz-pick",   "label": "what tool?" },
+    { "source": "viz-pick",   "target": "viewer",     "label": "build it" },
+    { "source": "viewer",     "target": "probe-wifi", "label": "/gogogo" },
+    { "source": "viewer",     "target": "probe-bt",   "label": "/gogogo" },
+    { "source": "viewer",     "target": "probe-lan",  "label": "/gogogo" },
+    { "source": "viewer",     "target": "probe-usb",  "label": "/gogogo" },
+    { "source": "viewer",     "target": "picass0",    "label": "parallel" },
+    { "source": "probe-wifi", "target": "emit",       "label": "24 APs" },
+    { "source": "probe-bt",   "target": "emit",       "label": "2 paired" },
+    { "source": "probe-lan",  "target": "emit",       "label": "4 hosts" },
+    { "source": "probe-usb",  "target": "emit",       "label": "2 devices" },
+    { "source": "emit",       "target": "munch",      "label": "auto-load" },
+    { "source": "picass0",    "target": "ship",       "label": "render" },
+    { "source": "munch",      "target": "ship",       "label": "on screen" }
+  ]
+}

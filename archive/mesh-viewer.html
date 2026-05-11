@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>edgerun mesh — rocky</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --panel: #131826;
+    --border: #1f2a44;
+    --text: #c8d4e8;
+    --text-dim: #6b7a99;
+    --accent: #00d9ff;
+    --hub: #ffffff;
+    --c-wifi-own: #00d9ff;
+    --c-wifi-neighbor: #3a6fa8;
+    --c-btle: #ff2dd0;
+    --c-btclassic: #b938ff;
+    --c-lan: #00ff88;
+    --c-usb: #ffaa00;
+    --c-mdns: #ff6600;
+    --c-tailnet: #ff4466;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; height: 100%; width: 100%;
+    background: var(--bg); color: var(--text);
+    font-family: "JetBrains Mono", "Fira Code", "Cascadia Mono", Consolas, monospace;
+    font-size: 12px; overflow: hidden;
+  }
+  #app { display: flex; height: 100vh; width: 100vw; }
+  #sidebar {
+    width: 280px; min-width: 280px; height: 100%;
+    background: var(--panel); border-right: 1px solid var(--border);
+    padding: 16px; overflow-y: auto;
+  }
+  #sidebar h1 {
+    font-size: 14px; margin: 0 0 4px 0; color: var(--accent);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  #sidebar .subtitle {
+    font-size: 10px; color: var(--text-dim); margin-bottom: 16px;
+  }
+  #sidebar h2 {
+    font-size: 10px; margin: 16px 0 8px 0; color: var(--text-dim);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    border-bottom: 1px solid var(--border); padding-bottom: 4px;
+  }
+  .layer {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 6px; cursor: pointer; border-radius: 3px;
+    user-select: none;
+  }
+  .layer:hover { background: rgba(255,255,255,0.04); }
+  .layer .swatch {
+    width: 10px; height: 10px; border-radius: 50%;
+    box-shadow: 0 0 6px currentColor;
+  }
+  .layer .label { flex: 1; }
+  .layer .count { color: var(--text-dim); font-size: 10px; }
+  .layer.off { opacity: 0.4; }
+  .layer.off .swatch { box-shadow: none; }
+  #search {
+    width: 100%; background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 6px 8px; font-family: inherit; font-size: 11px;
+    outline: none;
+  }
+  #search:focus { border-color: var(--accent); }
+  #node-details {
+    font-size: 11px; line-height: 1.6;
+  }
+  #node-details .empty { color: var(--text-dim); font-style: italic; }
+  #node-details .row { display: flex; gap: 8px; }
+  #node-details .key { color: var(--text-dim); min-width: 70px; }
+  #node-details .val { color: var(--text); word-break: break-all; }
+  #node-details .name {
+    font-size: 13px; color: var(--accent); margin-bottom: 6px;
+    word-break: break-all;
+  }
+  #file-row {
+    display: flex; gap: 6px; margin-top: 4px;
+  }
+  button.btn {
+    flex: 1; background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 3px;
+    padding: 6px 8px; font-family: inherit; font-size: 10px;
+    cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  button.btn:hover { border-color: var(--accent); color: var(--accent); }
+  #graph-wrap { flex: 1; position: relative; }
+  svg { display: block; width: 100%; height: 100%; cursor: grab; }
+  svg:active { cursor: grabbing; }
+  .link { stroke-opacity: 0.35; }
+  .node-circle {
+    cursor: pointer;
+    transition: filter 0.15s;
+  }
+  .node-circle:hover { filter: brightness(1.4); }
+  .node-label {
+    fill: var(--text); font-size: 10px;
+    pointer-events: none;
+    text-shadow: 0 0 4px var(--bg), 0 0 4px var(--bg), 0 0 4px var(--bg);
+  }
+  .hidden { display: none; }
+  .stat-bar {
+    position: absolute; bottom: 8px; left: 8px;
+    background: rgba(19,24,38,0.9); border: 1px solid var(--border);
+    padding: 6px 10px; font-size: 10px; color: var(--text-dim);
+    border-radius: 3px;
+  }
+  .stat-bar .accent { color: var(--accent); }
+
+  /* temporal — pulsing ring for nodes new this scan */
+  @keyframes pulseRing {
+    0%   { stroke-width: 0.5; stroke-opacity: 1; r-offset: 0; }
+    50%  { stroke-width: 3;   stroke-opacity: 0.6; }
+    100% { stroke-width: 0.5; stroke-opacity: 1; }
+  }
+  .node-circle.is-new {
+    stroke: #ffffff !important;
+    stroke-width: 2 !important;
+    animation: pulseRing 1.6s ease-in-out infinite;
+  }
+  .temporal-bar {
+    margin-top: 8px;
+    font-size: 10px; color: var(--text-dim);
+    border-top: 1px solid var(--border); padding-top: 8px;
+  }
+  .temporal-bar .new-count { color: #fff; }
+  .temporal-bar .gone-count { color: var(--text-dim); opacity: 0.7; }
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <h1>edgerun mesh</h1>
+    <div class="subtitle">rocky :: physical sensor map</div>
+
+    <h2>layers</h2>
+    <div id="layer-toggles"></div>
+
+    <h2>search</h2>
+    <input id="search" placeholder="filter by name, mac, vendor...">
+
+    <h2>node</h2>
+    <div id="node-details"><div class="empty">click a node</div></div>
+
+    <h2>data</h2>
+    <div id="file-row">
+      <button class="btn" id="load-btn">load mesh.json</button>
+      <button class="btn" id="reset-btn">reset</button>
+    </div>
+    <input type="file" id="file-input" accept=".json" hidden>
+
+    <h2>temporal</h2>
+    <div id="temporal-info" class="temporal-bar">
+      <div>scan: <span id="t-scan">—</span></div>
+      <div>new this run: <span class="new-count" id="t-new">—</span></div>
+      <div>departed since prev: <span class="gone-count" id="t-gone">—</span></div>
+    </div>
+  </aside>
+
+  <div id="graph-wrap">
+    <svg id="graph"></svg>
+    <div class="stat-bar">
+      <span class="accent" id="stat-visible">0</span> / <span id="stat-total">0</span> nodes visible
+      &nbsp;·&nbsp;
+      drag = grab · release = float · scroll = zoom
+    </div>
+  </div>
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="mesh-data.js" onerror="console.warn('no mesh-data.js — using SAMPLE')"></script>
+<script>
+// -------- sample data (replaced when real mesh.json is loaded) --------
+const SAMPLE = {
+  generated: "2026-05-10T00:00:00Z",
+  hub: { id: "rocky", label: "rocky", note: "central node — Windows 11 desktop" },
+  nodes: [
+    // wifi own
+    { id: "ap-umbroody", label: "Umbroody-5G", medium: "wifi-own", rssi: -42, vendor: "Eero", channel: 36, bssid: "aa:bb:cc:11:22:33" },
+
+    // wifi neighbors (a sample of building APs)
+    { id: "ap-n1", label: "Verizon_FiOS_42A", medium: "wifi-neighbor", rssi: -68, vendor: "Verizon", channel: 6 },
+    { id: "ap-n2", label: "Spectrum-7C81", medium: "wifi-neighbor", rssi: -72, vendor: "Charter", channel: 11 },
+    { id: "ap-n3", label: "MyOptimum-5G", medium: "wifi-neighbor", rssi: -75, vendor: "Altice", channel: 149 },
+    { id: "ap-n4", label: "ATT-WIFI-9KaT", medium: "wifi-neighbor", rssi: -78, vendor: "Arris", channel: 1 },
+    { id: "ap-n5", label: "linksys_4422", medium: "wifi-neighbor", rssi: -81, vendor: "Linksys", channel: 6 },
+    { id: "ap-n6", label: "<hidden>", medium: "wifi-neighbor", rssi: -83, vendor: "TP-Link", channel: 11 },
+    { id: "ap-n7", label: "NETGEAR55", medium: "wifi-neighbor", rssi: -84, vendor: "Netgear", channel: 36 },
+    { id: "ap-n8", label: "iPhone-Hotspot", medium: "wifi-neighbor", rssi: -65, vendor: "Apple", channel: 6 },
+    { id: "ap-n9", label: "Brooklyn_Guest", medium: "wifi-neighbor", rssi: -86, vendor: "Ubiquiti", channel: 1 },
+    { id: "ap-n10", label: "FiOS-A4G3", medium: "wifi-neighbor", rssi: -88, vendor: "Verizon", channel: 11 },
+    { id: "ap-n11", label: "Adams10E", medium: "wifi-neighbor", rssi: -77, vendor: "Eero", channel: 44 },
+    { id: "ap-n12", label: "xfinitywifi", medium: "wifi-neighbor", rssi: -74, vendor: "Comcast", channel: 6 },
+    { id: "ap-n13", label: "Apt9B-2.4", medium: "wifi-neighbor", rssi: -82, vendor: "TP-Link", channel: 11 },
+
+    // bluetooth LE
+    { id: "btle-1", label: "Pebble (phone)", medium: "btle", rssi: -55, addr: "C8:42:11:9F:30:01" },
+    { id: "btle-2", label: "AirPods Pro", medium: "btle", rssi: -48, addr: "5C:F7:E6:AA:BB:01" },
+    { id: "btle-3", label: "Mi Band 7", medium: "btle", rssi: -62, addr: "44:C9:A2:15:80:71" },
+    { id: "btle-4", label: "Tile Mate", medium: "btle", rssi: -71, addr: "D1:C0:91:00:42:8F" },
+    { id: "btle-5", label: "<unnamed beacon>", medium: "btle", rssi: -82, addr: "F0:11:22:33:44:55" },
+
+    // bluetooth classic (paired)
+    { id: "bt-1", label: "MX Master 3S", medium: "btclassic", addr: "94:DB:56:00:11:22", profile: "HID" },
+    { id: "bt-2", label: "K380 Keyboard", medium: "btclassic", addr: "94:DB:56:00:11:33", profile: "HID" },
+    { id: "bt-3", label: "WH-1000XM5", medium: "btclassic", addr: "AC:80:0A:00:42:99", profile: "A2DP" },
+
+    // LAN hosts
+    { id: "lan-router", label: "eero-router", medium: "lan", ip: "192.168.4.1", mac: "aa:bb:cc:11:22:33", vendor: "Eero" },
+    { id: "lan-printer", label: "HP-LaserJet-4100", medium: "lan", ip: "192.168.4.21", mac: "00:80:77:11:22:33", vendor: "HP" },
+    { id: "lan-cast", label: "ChromecastUltra", medium: "lan", ip: "192.168.4.45", mac: "44:7D:A5:00:11:22", vendor: "Google" },
+    { id: "lan-bulb1", label: "hue-bulb-living", medium: "lan", ip: "192.168.4.62", mac: "00:17:88:00:11:22", vendor: "Philips" },
+    { id: "lan-bulb2", label: "hue-bulb-bedroom", medium: "lan", ip: "192.168.4.63", mac: "00:17:88:00:11:33", vendor: "Philips" },
+    { id: "lan-aqua", label: "aqua-tablet", medium: "lan", ip: "192.168.4.71", mac: "F8:A2:D6:00:11:22", vendor: "ONN" },
+
+    // USB
+    { id: "usb-hub", label: "Anker 7-port hub", medium: "usb", vid: "291A", pid: "8389" },
+    { id: "usb-kb", label: "Keychron K8", medium: "usb", vid: "3434", pid: "0220" },
+    { id: "usb-mouse", label: "Logi G502", medium: "usb", vid: "046D", pid: "C08B" },
+    { id: "usb-yubi", label: "YubiKey 5", medium: "usb", vid: "1050", pid: "0407" },
+    { id: "usb-mic", label: "Blue Yeti", medium: "usb", vid: "B58E", pid: "9E84" },
+
+    // mDNS / SSDP
+    { id: "mdns-printer", label: "_ipp._tcp / HP-LaserJet", medium: "mdns", host: "HP-LaserJet-4100.local" },
+    { id: "mdns-cast", label: "_googlecast._tcp", medium: "mdns", host: "ChromecastUltra.local" },
+    { id: "mdns-airplay", label: "_airplay._tcp", medium: "mdns", host: "AppleTV.local" },
+  ],
+};
+
+// -------- layer config --------
+const LAYERS = [
+  { id: "wifi-own",      label: "Wi-Fi (own)",       color: "var(--c-wifi-own)",      colorHex: "#00d9ff", on: true },
+  { id: "wifi-neighbor", label: "Wi-Fi (neighbors)", color: "var(--c-wifi-neighbor)", colorHex: "#3a6fa8", on: false },
+  { id: "btle",          label: "Bluetooth LE",      color: "var(--c-btle)",          colorHex: "#ff2dd0", on: true },
+  { id: "btclassic",     label: "Bluetooth (paired)",color: "var(--c-btclassic)",     colorHex: "#b938ff", on: true },
+  { id: "lan",           label: "LAN hosts",         color: "var(--c-lan)",           colorHex: "#00ff88", on: true },
+  { id: "usb",           label: "USB / PnP",         color: "var(--c-usb)",           colorHex: "#ffaa00", on: true },
+  { id: "mdns",          label: "mDNS / SSDP",       color: "var(--c-mdns)",          colorHex: "#ff6600", on: true },
+  { id: "tailnet",       label: "Tailnet (logical)", color: "var(--c-tailnet)",       colorHex: "#ff4466", on: true },
+];
+const layerState = {};
+LAYERS.forEach(l => layerState[l.id] = l.on);
+
+// -------- state --------
+// auto-prefer real probe data baked in by probe-mesh.ps1, fall back to SAMPLE
+let DATA = (typeof window.MESH_DATA === "object" && window.MESH_DATA && window.MESH_DATA.hub) ? window.MESH_DATA : SAMPLE;
+let svg, g, sim;
+let nodeSel, linkSel, labelSel;
+let allNodes = [], allLinks = [];
+let searchTerm = "";
+
+// -------- render --------
+function init() {
+  svg = d3.select("#graph");
+  const wrap = document.getElementById("graph-wrap");
+  const w = wrap.clientWidth, h = wrap.clientHeight;
+
+  svg.attr("viewBox", [-w/2, -h/2, w, h]);
+
+  g = svg.append("g");
+
+  // zoom/pan
+  const zoom = d3.zoom()
+    .scaleExtent([0.2, 5])
+    .on("zoom", (e) => g.attr("transform", e.transform));
+  svg.call(zoom);
+
+  // glow filter
+  const defs = svg.append("defs");
+  const filter = defs.append("filter").attr("id", "glow").attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
+  filter.append("feGaussianBlur").attr("stdDeviation", "2.5").attr("result", "coloredBlur");
+  const merge = filter.append("feMerge");
+  merge.append("feMergeNode").attr("in", "coloredBlur");
+  merge.append("feMergeNode").attr("in", "SourceGraphic");
+
+  buildLayerToggles();
+  buildGraph();
+  updateTemporalBar();
+
+  // resize
+  window.addEventListener("resize", () => {
+    const w2 = wrap.clientWidth, h2 = wrap.clientHeight;
+    svg.attr("viewBox", [-w2/2, -h2/2, w2, h2]);
+    if (sim) sim.force("center", d3.forceCenter(0, 0)).alpha(0.3).restart();
+  });
+}
+
+function buildLayerToggles() {
+  const counts = {};
+  LAYERS.forEach(l => counts[l.id] = 0);
+  DATA.nodes.forEach(n => { if (counts[n.medium] !== undefined) counts[n.medium]++; });
+
+  const host = d3.select("#layer-toggles");
+  host.selectAll("*").remove();
+  LAYERS.forEach(l => {
+    const row = host.append("div")
+      .attr("class", "layer" + (layerState[l.id] ? "" : " off"))
+      .on("click", function() {
+        layerState[l.id] = !layerState[l.id];
+        d3.select(this).classed("off", !layerState[l.id]);
+        applyVisibility();
+      });
+    row.append("div").attr("class", "swatch")
+      .style("background", l.colorHex).style("color", l.colorHex);
+    row.append("div").attr("class", "label").text(l.label);
+    row.append("div").attr("class", "count").text(counts[l.id] || 0);
+  });
+}
+
+function buildGraph() {
+  // build nodes + links: hub at center, every device linked to hub
+  const hub = { ...DATA.hub, medium: "hub", _hub: true };
+  allNodes = [hub, ...DATA.nodes];
+  allLinks = DATA.nodes.map(n => ({ source: hub.id, target: n.id, medium: n.medium }));
+
+  if (sim) sim.stop();
+
+  // ------ links
+  linkSel = g.append("g").attr("class", "links")
+    .selectAll("line").data(allLinks).enter().append("line")
+    .attr("class", d => "link link-" + d.medium)
+    .attr("stroke", d => colorFor(d.medium))
+    .attr("stroke-width", 1);
+
+  // ------ nodes
+  const nodeG = g.append("g").attr("class", "nodes")
+    .selectAll("g").data(allNodes).enter().append("g")
+    .attr("class", d => "node node-" + d.medium)
+    .call(d3.drag()
+      .on("start", dragStart)
+      .on("drag", dragMove)
+      .on("end", dragEnd));
+
+  nodeSel = nodeG.append("circle")
+    .attr("class", d => "node-circle" + (d.is_new && !d._hub ? " is-new" : ""))
+    .attr("r", d => radiusFor(d))
+    .attr("fill", d => colorFor(d.medium))
+    .attr("stroke", d => d._hub ? "#ffffff" : "rgba(255,255,255,0.15)")
+    .attr("stroke-width", d => d._hub ? 2 : 0.5)
+    .attr("filter", "url(#glow)")
+    .on("click", (e, d) => showDetails(d));
+
+  labelSel = nodeG.append("text")
+    .attr("class", "node-label")
+    .attr("dx", d => radiusFor(d) + 4)
+    .attr("dy", "0.35em")
+    .text(d => d.label || d.id);
+
+  // ------ simulation
+  sim = d3.forceSimulation(allNodes)
+    .force("link", d3.forceLink(allLinks).id(d => d.id).distance(d => linkDistanceFor(d)).strength(0.4))
+    .force("charge", d3.forceManyBody().strength(d => d._hub ? -800 : -180))
+    .force("center", d3.forceCenter(0, 0).strength(0.05))
+    .force("collide", d3.forceCollide().radius(d => radiusFor(d) + 8))
+    .alphaDecay(0.015)        // slow settle — keeps gentle motion
+    .velocityDecay(0.45)
+    .on("tick", tick);
+
+  applyVisibility();
+}
+
+function tick() {
+  linkSel
+    .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+    .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+  d3.selectAll(".node")
+    .attr("transform", d => `translate(${d.x},${d.y})`);
+}
+
+function radiusFor(n) {
+  if (n._hub) return 18;
+  // signal-aware sizing where we have RSSI, otherwise 6
+  if (typeof n.rssi === "number") {
+    // -30 (close) → 10, -90 (far) → 4
+    const v = Math.max(-90, Math.min(-30, n.rssi));
+    return 4 + ((-30 - v) / -60) * 6 + 6;
+  }
+  return 7;
+}
+
+function linkDistanceFor(l) {
+  const t = l.target;
+  if (typeof t.rssi === "number") {
+    // closer = shorter link
+    const v = Math.max(-90, Math.min(-30, t.rssi));
+    return 50 + ((v + 30) / -60) * 180;
+  }
+  // fixed by medium
+  const map = { usb: 70, "btclassic": 90, lan: 110, mdns: 130, btle: 140, tailnet: 200 };
+  return map[l.medium] || 110;
+}
+
+function colorFor(medium) {
+  if (medium === "hub") return "#ffffff";
+  const l = LAYERS.find(x => x.id === medium);
+  return l ? l.colorHex : "#888";
+}
+
+function applyVisibility() {
+  // node visibility = layer on AND matches search (if any)
+  const term = searchTerm.trim().toLowerCase();
+  let visible = 0;
+  d3.selectAll(".node").each(function(d) {
+    const layerOn = d._hub || layerState[d.medium];
+    let match = true;
+    if (term && !d._hub) {
+      const hay = JSON.stringify(d).toLowerCase();
+      match = hay.includes(term);
+    }
+    const show = layerOn && match;
+    d3.select(this).classed("hidden", !show);
+    if (show && !d._hub) visible++;
+  });
+  d3.selectAll(".link").each(function(d) {
+    const targetVisible = d.target._hub || layerState[d.target.medium];
+    let match = true;
+    if (term) {
+      const hay = JSON.stringify(d.target).toLowerCase();
+      match = hay.includes(term);
+    }
+    d3.select(this).classed("hidden", !(targetVisible && match));
+  });
+  document.getElementById("stat-visible").textContent = visible;
+  document.getElementById("stat-total").textContent = allNodes.length - 1;
+  // re-energize sim a bit when layers change so things rearrange
+  if (sim) sim.alpha(0.3).restart();
+}
+
+function updateTemporalBar() {
+  const sb = document.getElementById("t-scan");
+  const nb = document.getElementById("t-new");
+  const gb = document.getElementById("t-gone");
+  if (!sb) return;
+  const sh = DATA.scan_history || {};
+  sb.textContent = sh.this_scan_id ? `#${sh.this_scan_id} of ${sh.total_scans}` : "—";
+  const newCount = (DATA.nodes || []).filter(n => n.is_new).length;
+  nb.textContent = newCount;
+  const gone = (DATA.departed_recent || []).length;
+  gb.textContent = gone;
+}
+
+function showDetails(d) {
+  const host = d3.select("#node-details");
+  host.selectAll("*").remove();
+  host.append("div").attr("class", "name").text(d.label || d.id);
+  host.append("div").attr("class", "row")
+    .call(div => { div.append("div").attr("class","key").text("medium"); div.append("div").attr("class","val").text(d.medium); });
+  Object.entries(d).forEach(([k, v]) => {
+    if (["id","label","medium","x","y","vx","vy","fx","fy","index","_hub","note"].includes(k)) return;
+    if (v === null || v === undefined) return;
+    host.append("div").attr("class", "row")
+      .call(div => {
+        div.append("div").attr("class","key").text(k);
+        div.append("div").attr("class","val").text(String(v));
+      });
+  });
+  if (d.note) {
+    host.append("div").style("margin-top","8px").style("color","var(--text-dim)").style("font-style","italic").text(d.note);
+  }
+}
+
+function dragStart(e, d) {
+  if (!e.active) sim.alphaTarget(0.3).restart();
+  d.fx = d.x; d.fy = d.y;
+}
+function dragMove(e, d) { d.fx = e.x; d.fy = e.y; }
+function dragEnd(e, d) {
+  if (!e.active) sim.alphaTarget(0);
+  // release — node floats again (Obsidian style)
+  d.fx = null; d.fy = null;
+}
+
+// -------- file load --------
+document.getElementById("load-btn").addEventListener("click", () => {
+  document.getElementById("file-input").click();
+});
+document.getElementById("file-input").addEventListener("change", (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const j = JSON.parse(r.result);
+      if (!j.hub || !Array.isArray(j.nodes)) throw new Error("missing hub or nodes[]");
+      DATA = j;
+      g.selectAll("*").remove();
+      buildGraph();
+      buildLayerToggles();
+      updateTemporalBar();
+    } catch (err) {
+      alert("invalid mesh.json: " + err.message);
+    }
+  };
+  r.readAsText(f);
+});
+document.getElementById("reset-btn").addEventListener("click", () => {
+  DATA = SAMPLE;
+  g.selectAll("*").remove();
+  buildGraph();
+  buildLayerToggles();
+});
+
+// -------- search --------
+document.getElementById("search").addEventListener("input", (e) => {
+  searchTerm = e.target.value;
+  applyVisibility();
+});
+
+// -------- go --------
+init();
+</script>
+</body>
+</html>

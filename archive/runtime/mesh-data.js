@@ -1,0 +1,2413 @@
+window.MESH_DATA = {
+  "hub": {
+    "label": "rocky",
+    "id": "rocky",
+    "note": "Windows 11 desktop \u00c2\u00b7 ctgau \u00c2\u00b7 physical sensor probe"
+  },
+  "layers_present": [
+    "btclassic",
+    "btle",
+    "lan",
+    "mdns",
+    "tailnet",
+    "usb",
+    "wifi-neighbor",
+    "wifi-own"
+  ],
+  "generated": "2026-05-10T16:24:15.3947869Z",
+  "nodes": [
+    {
+      "id": "wifi-34:98:b5:f7:70:0e",
+      "rssi": -97,
+      "label": "<hidden>",
+      "signal": 5,
+      "radio": "802.11ax",
+      "channel": 157,
+      "medium": "wifi-neighbor",
+      "vendor": "NETGEAR",
+      "bssid": "34:98:b5:f7:70:0e",
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "id": "wifi-92:f8:53:91:5a:1c",
+      "rssi": -93,
+      "label": "<hidden>",
+      "signal": 12,
+      "radio": "802.11ax",
+      "channel": 132,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "92:f8:53:91:5a:1c",
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "id": "wifi-82:f8:53:19:dd:a6",
+      "rssi": -93,
+      "label": "<hidden>",
+      "signal": 12,
+      "radio": "802.11ax",
+      "channel": 136,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "82:f8:53:19:dd:a6",
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "id": "wifi-8a:f8:53:19:dd:a0",
+      "rssi": -87,
+      "label": "<hidden>",
+      "signal": 21,
+      "radio": "802.11ax",
+      "channel": 52,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "8a:f8:53:19:dd:a0",
+      "first_seen": "2026-05-10T08:24:37.7143324Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 2,
+      "is_new": false
+    },
+    {
+      "id": "wifi-92:f8:53:e5:9e:4e",
+      "rssi": -87,
+      "label": "<hidden>",
+      "signal": 21,
+      "radio": "802.11ax",
+      "channel": 60,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "92:f8:53:e5:9e:4e",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 3,
+      "is_new": false
+    },
+    {
+      "id": "wifi-8a:bd:c5:4c:32:98",
+      "rssi": -80,
+      "label": "<hidden>",
+      "signal": 33,
+      "radio": "802.11ax",
+      "channel": 100,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "8a:bd:c5:4c:32:98",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 4,
+      "is_new": false
+    },
+    {
+      "id": "wifi-22:ef:bd:45:01:53",
+      "rssi": -53,
+      "label": "<hidden>",
+      "signal": 78,
+      "radio": "802.11n",
+      "channel": 1,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "22:ef:bd:45:01:53",
+      "first_seen": "2026-05-10T13:38:16.9656958Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 2,
+      "is_new": false
+    },
+    {
+      "id": "wifi-7e:67:0e:e6:a1:0a",
+      "rssi": -50,
+      "label": "<hidden>",
+      "signal": 83,
+      "radio": "802.11ax",
+      "channel": 100,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "7e:67:0e:e6:a1:0a",
+      "first_seen": "2026-05-10T08:24:37.7143324Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 3,
+      "is_new": false
+    },
+    {
+      "id": "wifi-62:a2:22:c8:b3:87",
+      "rssi": -97,
+      "label": "Fios-Pj6cL 5G",
+      "signal": 5,
+      "radio": "802.11ax",
+      "channel": 104,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "62:a2:22:c8:b3:87",
+      "first_seen": "2026-05-10T08:24:37.7143324Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 2,
+      "is_new": false
+    },
+    {
+      "id": "wifi-b8:f8:53:91:5a:1b",
+      "rssi": -95,
+      "label": "Fios-Pj6cL 5G",
+      "signal": 9,
+      "radio": "802.11ax",
+      "channel": 132,
+      "medium": "wifi-neighbor",
+      "vendor": "Arcadyan Corporation",
+      "bssid": "b8:f8:53:91:5a:1b",
+      "first_seen": "2026-05-10T08:24:37.7143324Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 3,
+      "is_new": false
+    },
+    {
+      "id": "wifi-b8:f8:53:19:dd:a5",
+      "rssi": -93,
+      "label": "Fios-F3yvC",
+      "signal": 12,
+      "radio": "802.11ax",
+      "channel": 136,
+      "medium": "wifi-neighbor",
+      "vendor": "Arcadyan Corporation",
+      "bssid": "b8:f8:53:19:dd:a5",
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "id": "wifi-b8:f8:53:19:dd:a6",
+      "rssi": -91,
+      "label": "Fios-F3yvC",
+      "signal": 15,
+      "radio": "802.11ax",
+      "channel": 52,
+      "medium": "wifi-neighbor",
+      "vendor": "Arcadyan Corporation",
+      "bssid": "b8:f8:53:19:dd:a6",
+      "first_seen": "2026-05-10T08:24:37.7143324Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 2,
+      "is_new": false
+    },
+    {
+      "id": "wifi-b8:f8:53:19:dd:a4",
+      "rssi": -69,
+      "label": "Fios-F3yvC",
+      "signal": 51,
+      "radio": "802.11n",
+      "channel": 1,
+      "medium": "wifi-neighbor",
+      "vendor": "Arcadyan Corporation",
+      "bssid": "b8:f8:53:19:dd:a4",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-b8:f8:53:e5:9e:4c",
+      "rssi": -87,
+      "label": "Fios-Dx8mN",
+      "signal": 21,
+      "radio": "802.11ax",
+      "channel": 60,
+      "medium": "wifi-neighbor",
+      "vendor": "Arcadyan Corporation",
+      "bssid": "b8:f8:53:e5:9e:4c",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-34:98:b5:f5:3d:37",
+      "rssi": -84,
+      "label": "BNest",
+      "signal": 27,
+      "radio": "802.11ax",
+      "channel": 40,
+      "medium": "wifi-neighbor",
+      "vendor": "NETGEAR",
+      "bssid": "34:98:b5:f5:3d:37",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 4,
+      "is_new": false
+    },
+    {
+      "id": "wifi-3a:98:b5:f5:3d:36",
+      "rssi": -54,
+      "label": "BNest",
+      "signal": 77,
+      "radio": "802.11ax",
+      "channel": 9,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "3a:98:b5:f5:3d:36",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 4,
+      "is_new": false
+    },
+    {
+      "id": "wifi-3c:bd:c5:4c:32:9f",
+      "rssi": -80,
+      "label": "Fios-ZJk3p",
+      "signal": 33,
+      "radio": "802.11ax",
+      "channel": 100,
+      "medium": "wifi-neighbor",
+      "vendor": "Arcadyan Corporation",
+      "bssid": "3c:bd:c5:4c:32:9f",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 4,
+      "is_new": false
+    },
+    {
+      "id": "wifi-3c:bd:c5:4c:32:9e",
+      "rssi": -54,
+      "label": "Fios-ZJk3p",
+      "signal": 77,
+      "radio": "802.11n",
+      "channel": 6,
+      "medium": "wifi-neighbor",
+      "vendor": "Arcadyan Corporation",
+      "bssid": "3c:bd:c5:4c:32:9e",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-04:a2:22:c8:b3:84",
+      "rssi": -78,
+      "label": "Fios-Pj6cL",
+      "signal": 36,
+      "radio": "802.11n",
+      "channel": 1,
+      "medium": "wifi-neighbor",
+      "vendor": "Arcadyan Corporation",
+      "bssid": "04:a2:22:c8:b3:84",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-f8:aa:3f:f4:fa:d7",
+      "rssi": -75,
+      "label": "WiFindingNemo",
+      "signal": 42,
+      "radio": "802.11ax",
+      "channel": 6,
+      "medium": "wifi-neighbor",
+      "vendor": "DWnet Technologies(Suzhou) Corporation",
+      "bssid": "f8:aa:3f:f4:fa:d7",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 3,
+      "is_new": false
+    },
+    {
+      "id": "wifi-ac:91:9b:61:21:c9",
+      "rssi": -75,
+      "label": "Downstate",
+      "signal": 42,
+      "radio": "802.11ax",
+      "channel": 1,
+      "medium": "wifi-neighbor",
+      "vendor": "WNC Corporation",
+      "bssid": "ac:91:9b:61:21:c9",
+      "first_seen": "2026-05-10T08:24:37.7143324Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 2,
+      "is_new": false
+    },
+    {
+      "id": "wifi-ac:91:9b:61:21:c8",
+      "rssi": -53,
+      "label": "Downstate",
+      "signal": 79,
+      "radio": "802.11n",
+      "channel": 6,
+      "medium": "wifi-neighbor",
+      "vendor": "WNC Corporation",
+      "bssid": "ac:91:9b:61:21:c8",
+      "first_seen": "2026-05-10T08:24:37.7143324Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 3,
+      "is_new": false
+    },
+    {
+      "id": "wifi-92:3b:ad:ce:23:22",
+      "rssi": -73,
+      "label": "GOOGLE",
+      "signal": 45,
+      "radio": "802.11ac",
+      "channel": 11,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "92:3b:ad:ce:23:22",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 2,
+      "is_new": false
+    },
+    {
+      "id": "wifi-3c:bd:c5:2d:7d:d2",
+      "rssi": -73,
+      "label": "Fios-s4CW8",
+      "signal": 45,
+      "radio": "802.11n",
+      "channel": 1,
+      "medium": "wifi-neighbor",
+      "vendor": "Arcadyan Corporation",
+      "bssid": "3c:bd:c5:2d:7d:d2",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 4,
+      "is_new": false
+    },
+    {
+      "id": "wifi-7c:10:c9:58:8d:f0",
+      "rssi": -71,
+      "label": "R&A 2.0",
+      "signal": 48,
+      "radio": "802.11ax",
+      "channel": 8,
+      "medium": "wifi-neighbor",
+      "vendor": "ASUSTek COMPUTER INC.",
+      "bssid": "7c:10:c9:58:8d:f0",
+      "first_seen": "2026-05-10T08:26:04.7850242Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 3,
+      "is_new": false
+    },
+    {
+      "id": "wifi-84:1e:a3:c9:47:e6",
+      "rssi": -69,
+      "label": "SpectrumSetup-E0",
+      "signal": 51,
+      "radio": "802.11n",
+      "channel": 6,
+      "medium": "wifi-neighbor",
+      "vendor": "Sagemcom Broadband SAS",
+      "bssid": "84:1e:a3:c9:47:e6",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 4,
+      "is_new": false
+    },
+    {
+      "id": "wifi-42:98:b5:f5:3c:fa",
+      "rssi": -68,
+      "label": "BNest-IoT",
+      "signal": 54,
+      "radio": "802.11ax",
+      "channel": 9,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "42:98:b5:f5:3c:fa",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 2,
+      "is_new": false
+    },
+    {
+      "id": "wifi-42:98:b5:f5:3d:36",
+      "rssi": -54,
+      "label": "BNest-IoT",
+      "signal": 76,
+      "radio": "802.11ax",
+      "channel": 9,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "42:98:b5:f5:3d:36",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 3,
+      "is_new": false
+    },
+    {
+      "id": "wifi-fa:8f:ca:7c:00:72",
+      "rssi": -68,
+      "label": "Bedroom speaker.o,",
+      "signal": 54,
+      "radio": "802.11n",
+      "channel": 6,
+      "medium": "wifi-neighbor",
+      "vendor": "(random/local)",
+      "bssid": "fa:8f:ca:7c:00:72",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 4,
+      "is_new": false
+    },
+    {
+      "id": "wifi-1c:3b:f3:3f:08:a7",
+      "rssi": -64,
+      "label": "Frankie LANning",
+      "signal": 60,
+      "radio": "802.11ac",
+      "channel": 149,
+      "medium": "wifi-neighbor",
+      "vendor": "TP-LINK TECHNOLOGIES CO.",
+      "bssid": "1c:3b:f3:3f:08:a7",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-1c:3b:f3:3f:08:a6",
+      "rssi": -62,
+      "label": "Frankie LANning",
+      "signal": 63,
+      "radio": "802.11ac",
+      "channel": 44,
+      "medium": "wifi-neighbor",
+      "vendor": "TP-LINK TECHNOLOGIES CO.",
+      "bssid": "1c:3b:f3:3f:08:a6",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-1c:3b:f3:3f:08:a8",
+      "rssi": -53,
+      "label": "Frankie LANning",
+      "signal": 78,
+      "radio": "802.11n",
+      "channel": 3,
+      "medium": "wifi-neighbor",
+      "vendor": "TP-LINK TECHNOLOGIES CO.",
+      "bssid": "1c:3b:f3:3f:08:a8",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 3,
+      "is_new": false
+    },
+    {
+      "id": "wifi-e8:ad:a6:64:5d:06",
+      "rssi": -62,
+      "label": "MySpectrumWiFi00-2G",
+      "signal": 63,
+      "radio": "802.11n",
+      "channel": 1,
+      "medium": "wifi-neighbor",
+      "vendor": "Sagemcom Broadband SAS",
+      "bssid": "e8:ad:a6:64:5d:06",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 4,
+      "is_new": false
+    },
+    {
+      "id": "wifi-ac:91:9b:3a:00:e9",
+      "rssi": -60,
+      "label": "Verizon_LTVGM6",
+      "signal": 66,
+      "radio": "802.11ax",
+      "channel": 157,
+      "medium": "wifi-neighbor",
+      "vendor": "WNC Corporation",
+      "bssid": "ac:91:9b:3a:00:e9",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-ac:91:9b:3a:00:e8",
+      "rssi": -54,
+      "label": "Verizon_LTVGM6",
+      "signal": 77,
+      "radio": "802.11n",
+      "channel": 6,
+      "medium": "wifi-neighbor",
+      "vendor": "WNC Corporation",
+      "bssid": "ac:91:9b:3a:00:e8",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-58:96:71:fd:93:eb",
+      "rssi": -55,
+      "label": "Verizon_47BLV9",
+      "signal": 75,
+      "radio": "802.11n",
+      "channel": 1,
+      "medium": "wifi-neighbor",
+      "vendor": "WNC Corporation",
+      "bssid": "58:96:71:fd:93:eb",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 4,
+      "is_new": false
+    },
+    {
+      "id": "wifi-58:96:71:f7:e0:ca",
+      "rssi": -54,
+      "label": "Verizon_6NKLYK",
+      "signal": 77,
+      "radio": "802.11n",
+      "channel": 11,
+      "medium": "wifi-neighbor",
+      "vendor": "WNC Corporation",
+      "bssid": "58:96:71:f7:e0:ca",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-fc:01:7c:be:f3:01",
+      "rssi": -52,
+      "label": "WIFIBEF2FD-5G",
+      "signal": 80,
+      "radio": "802.11ac",
+      "channel": 149,
+      "medium": "wifi-neighbor",
+      "vendor": "Hon Hai Precision Ind. Co.",
+      "bssid": "fc:01:7c:be:f3:01",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-78:67:0e:e6:a1:0a",
+      "rssi": -51,
+      "label": "Verizon_Z4KL4X",
+      "signal": 81,
+      "radio": "802.11ax",
+      "channel": 100,
+      "medium": "wifi-own",
+      "vendor": "WNC Corporation",
+      "bssid": "78:67:0e:e6:a1:0a",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-78:67:0e:e6:a1:09",
+      "rssi": -48,
+      "label": "Verizon_Z4KL4X",
+      "signal": 86,
+      "radio": "802.11n",
+      "channel": 1,
+      "medium": "wifi-neighbor",
+      "vendor": "WNC Corporation",
+      "bssid": "78:67:0e:e6:a1:09",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "wifi-fc:01:7c:be:f3:02",
+      "rssi": -50,
+      "label": "WIFIBEF2FD",
+      "signal": 83,
+      "radio": "802.11n",
+      "channel": 11,
+      "medium": "wifi-neighbor",
+      "vendor": "Hon Hai Precision Ind. Co.",
+      "bssid": "fc:01:7c:be:f3:02",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-6f186ac6ea9d",
+      "addr": "6f:18:6a:c6:ea:9d",
+      "rssi": -92,
+      "label": "<unnamed>",
+      "tx_power": 12,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-7be9e554925a",
+      "addr": "7b:e9:e5:54:92:5a",
+      "rssi": -86,
+      "label": "<unnamed>",
+      "tx_power": 0,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        6
+      ],
+      "id": "btle-0d932625dba2",
+      "addr": "0d:93:26:25:db:a2",
+      "rssi": -90,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Microsoft",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        1447
+      ],
+      "id": "btle-f3333d2adb17",
+      "addr": "f3:33:3d:2a:db:17",
+      "rssi": -89,
+      "label": "S18 2D12 LE",
+      "tx_power": 0,
+      "medium": "btle",
+      "manufacturer": "Samsung",
+      "service_uuids": [
+        "0000fe07-0000-1000-8000-00805f9b34fb"
+      ],
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-405e715348c1",
+      "addr": "40:5e:71:53:48:c1",
+      "rssi": -81,
+      "label": "<unnamed>",
+      "tx_power": 12,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-468745b29011",
+      "addr": "46:87:45:b2:90:11",
+      "rssi": -75,
+      "label": "<unnamed>",
+      "tx_power": 0,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-716ce7a950f4",
+      "addr": "71:6c:e7:a9:50:f4",
+      "rssi": -91,
+      "label": "<unnamed>",
+      "tx_power": 0,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-061a2dc81055",
+      "addr": "06:1a:2d:c8:10:55",
+      "rssi": -96,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-41e05ba6c078",
+      "addr": "41:e0:5b:a6:c0:78",
+      "rssi": -81,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-6fb65edb2d20",
+      "addr": "6f:b6:5e:db:2d:20",
+      "rssi": -88,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        6
+      ],
+      "id": "btle-3b5ce1d4b351",
+      "addr": "3b:5c:e1:d4:b3:51",
+      "rssi": -82,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Microsoft",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-7c36c74fe5c9",
+      "addr": "7c:36:c7:4f:e5:c9",
+      "rssi": -88,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-40f020c7f2bb",
+      "addr": "40:f0:20:c7:f2:bb",
+      "rssi": -94,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-52e971c2450e",
+      "addr": "52:e9:71:c2:45:0e",
+      "rssi": -86,
+      "label": "<unnamed>",
+      "tx_power": 8,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-6e16e42c2abf",
+      "addr": "6e:16:e4:2c:2a:bf",
+      "rssi": -95,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [],
+      "id": "btle-d7272441d2a6",
+      "addr": "d7:27:24:41:d2:a6",
+      "rssi": -91,
+      "label": "YamahaAV",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": null,
+      "service_uuids": [
+        "945ca2b0-852c-4ab8-b654-354df41c2795"
+      ],
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-5b0a5e55a703",
+      "addr": "5b:0a:5e:55:a7:03",
+      "rssi": -87,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        117
+      ],
+      "id": "btle-68fccaeec6b5",
+      "addr": "68:fc:ca:ee:c6:b5",
+      "rssi": -86,
+      "label": "Samsung The Frame 55",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Samsung Electronics",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "manufacturer_ids": [],
+      "id": "btle-ca5b5f76db95",
+      "addr": "ca:5b:5f:76:db:95",
+      "rssi": -94,
+      "label": "KICKR CORE 8705",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": null,
+      "service_uuids": [
+        "00001818-0000-1000-8000-00805f9b34fb",
+        "00001826-0000-1000-8000-00805f9b34fb"
+      ],
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "manufacturer_ids": [
+        101
+      ],
+      "id": "btle-f24ea4d29109",
+      "addr": "f2:4e:a4:d2:91:09",
+      "rssi": -91,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Hewlett-Packard",
+      "service_uuids": [
+        "0000fe78-0000-1000-8000-00805f9b34fb"
+      ],
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-7c7d09e354fc",
+      "addr": "7c:7d:09:e3:54:fc",
+      "rssi": -85,
+      "label": "<unnamed>",
+      "tx_power": 12,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-727707cc3d0d",
+      "addr": "72:77:07:cc:3d:0d",
+      "rssi": -93,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        1447
+      ],
+      "id": "btle-f33379f4d28d",
+      "addr": "f3:33:79:f4:d2:8d",
+      "rssi": -89,
+      "label": "S22 F6EE LE",
+      "tx_power": 0,
+      "medium": "btle",
+      "manufacturer": "Samsung",
+      "service_uuids": [
+        "0000fe07-0000-1000-8000-00805f9b34fb"
+      ],
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-0087ff8e5d75",
+      "addr": "00:87:ff:8e:5d:75",
+      "rssi": -92,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-d370fe30d83d",
+      "addr": "d3:70:fe:30:d8:3d",
+      "rssi": -97,
+      "label": "Eve",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 4,
+      "is_new": false
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-c7c004915194",
+      "addr": "c7:c0:04:91:51:94",
+      "rssi": -89,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-325addc51d60",
+      "addr": "32:5a:dd:c5:1d:60",
+      "rssi": -76,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [],
+      "id": "btle-2651b21d2139",
+      "addr": "26:51:b2:1d:21:39",
+      "rssi": -95,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": null,
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-5ff22c0e7dcd",
+      "addr": "5f:f2:2c:0e:7d:cd",
+      "rssi": -78,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        65535
+      ],
+      "id": "btle-7ce91376fbc6",
+      "addr": "7c:e9:13:76:fb:c6",
+      "rssi": -89,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "internal/test",
+      "service_uuids": [
+        "0000ff09-0000-1000-8000-00805f9b34fb"
+      ],
+      "first_seen": "2026-05-10T08:26:04.7850242Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 3,
+      "is_new": false
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-79f7a94f405d",
+      "addr": "79:f7:a9:4f:40:5d",
+      "rssi": -92,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-7e750d9c5d1d",
+      "addr": "7e:75:0d:9c:5d:1d",
+      "rssi": -86,
+      "label": "<unnamed>",
+      "tx_power": 12,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-54fb0fabd5b2",
+      "addr": "54:fb:0f:ab:d5:b2",
+      "rssi": -93,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-4bec1fe66552",
+      "addr": "4b:ec:1f:e6:65:52",
+      "rssi": -90,
+      "label": "<unnamed>",
+      "tx_power": 11,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-de2e2bfb7556",
+      "addr": "de:2e:2b:fb:75:56",
+      "rssi": -90,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-7f15a9af5e2a",
+      "addr": "7f:15:a9:af:5e:2a",
+      "rssi": -91,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-e315c28f002b",
+      "addr": "e3:15:c2:8f:00:2b",
+      "rssi": -84,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-5055fb7188cd",
+      "addr": "50:55:fb:71:88:cd",
+      "rssi": -94,
+      "label": "<unnamed>",
+      "tx_power": 0,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-4271fb2c3998",
+      "addr": "42:71:fb:2c:39:98",
+      "rssi": -94,
+      "label": "<unnamed>",
+      "tx_power": 0,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "manufacturer_ids": [
+        76
+      ],
+      "id": "btle-f0022eb81c9b",
+      "addr": "f0:02:2e:b8:1c:9b",
+      "rssi": -82,
+      "label": "<unnamed>",
+      "tx_power": null,
+      "medium": "btle",
+      "manufacturer": "Apple",
+      "service_uuids": [],
+      "first_seen": "2026-05-10T16:24:15.3947869Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 1,
+      "is_new": true
+    },
+    {
+      "id": "bt-2074cfb31d6a",
+      "label": "OpenComm by Shokz",
+      "medium": "btclassic",
+      "vendor": "Shenzhen Voxtech Co.",
+      "addr": "20:74:cf:b3:1d:6a",
+      "status": "OK",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "bt-a00ce290f0cd",
+      "label": "OpenFit Air by Shokz",
+      "medium": "btclassic",
+      "vendor": "Shenzhen Shokz Co.",
+      "addr": "a0:0c:e2:90:f0:cd",
+      "status": "OK",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "lan-ff:ff:ff:ff:ff:ff",
+      "label": "192.168.1.255",
+      "medium": "lan",
+      "mac": "ff:ff:ff:ff:ff:ff",
+      "vendor": "(random/local)",
+      "ip": "192.168.1.255",
+      "state": "Permanent",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "lan-a8:96:09:90:77:bd",
+      "label": "192.168.1.161",
+      "medium": "lan",
+      "mac": "a8:96:09:90:77:bd",
+      "vendor": "FN-LINK TECHNOLOGY Ltd.",
+      "ip": "192.168.1.161",
+      "state": "Reachable",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "lan-9c:c8:e9:3c:f8:66",
+      "label": "192.168.1.157",
+      "medium": "lan",
+      "mac": "9c:c8:e9:3c:f8:66",
+      "vendor": "Amazon Technologies Inc.",
+      "ip": "192.168.1.157",
+      "state": "Stale",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "lan-a6:55:10:94:97:b2",
+      "label": "192.168.1.154",
+      "medium": "lan",
+      "mac": "a6:55:10:94:97:b2",
+      "vendor": "(random/local)",
+      "ip": "192.168.1.154",
+      "state": "Stale",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "lan-78:67:0e:e6:a1:08",
+      "label": "192.168.1.1",
+      "medium": "lan",
+      "mac": "78:67:0e:e6:a1:08",
+      "vendor": "WNC Corporation",
+      "ip": "192.168.1.1",
+      "state": "Reachable",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "usb-1050-0407",
+      "label": "Microsoft Usbccid Smartcard Reader (WUDF)",
+      "class": "SmartCardReader",
+      "medium": "usb",
+      "pid": "0407",
+      "vid": "1050",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "usb-13D3-3563",
+      "label": "MediaTek Bluetooth Adapter",
+      "class": "Bluetooth",
+      "medium": "usb",
+      "pid": "3563",
+      "vid": "13D3",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "ssdp-192-168-1-1",
+      "server": "OpenWRT/19.07-SNAPSHOT UPnP/1.1 MiniUPnPd/2.2.0",
+      "ip": "192.168.1.1",
+      "label": "192.168.1.1 \u00b7 OpenWRT (router)",
+      "service_types": [
+        "upnp:rootdevice",
+        "urn:schemas-upnp-org:device:InternetGatewayDevice:2",
+        "urn:schemas-upnp-org:device:WANConnectionDevice:2",
+        "urn:schemas-upnp-org:device:WANDevice:2",
+        "urn:schemas-upnp-org:service:DeviceProtection:1",
+        "urn:schemas-upnp-org:service:Layer3Forwarding:1",
+        "urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1",
+        "urn:schemas-upnp-org:service:WANIPConnection:2",
+        "urn:schemas-upnp-org:service:WANIPv6FirewallControl:1",
+        "uuid:6adf600b-afe7-4bef-8902-2144ad4ea6fa",
+        "uuid:6adf600b-afe7-4bef-8902-2144ad4ea6fb",
+        "uuid:6adf600b-afe7-4bef-8902-2144ad4ea6fc"
+      ],
+      "medium": "mdns",
+      "location": "http://192.168.1.1:38983/rootDesc.xml",
+      "protocol": "ssdp",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "ssdp-192-168-1-161",
+      "server": "Linux/5.15.170-android14-11-g00580188c093-ab36, UPnP/1.0, Chromecast/1.6.18",
+      "ip": "192.168.1.161",
+      "label": "192.168.1.161 \u00b7 Chromecast",
+      "service_types": [
+        "upnp:rootdevice",
+        "urn:dial-multiscreen-org:device:dial:1",
+        "urn:dial-multiscreen-org:service:dial:1",
+        "uuid:4cd966e6-a1e6-1a15-ea94-338073876799"
+      ],
+      "medium": "mdns",
+      "location": "http://192.168.1.161:8008/ssdp/device-desc.xml",
+      "protocol": "ssdp",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "mdns-iPad-3-local-_companion-link-_tcp-local",
+      "ip": "192.168.1.154",
+      "label": "iPad-3.local (companion-link)",
+      "properties": {
+        "rpBA": "B8:75:E5:B0:09:26",
+        "rpAD": "a4a9ec66b80b",
+        "rpFl": "0x30000",
+        "rpHN": "4eabb61a1f18",
+        "rpMac": "0",
+        "rpVr": "580.4.2"
+      },
+      "host": "iPad-3.local",
+      "service": "_companion-link._tcp.local",
+      "medium": "mdns",
+      "port": 50339,
+      "first_seen": "2026-05-10T08:26:04.7850242Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 2,
+      "is_new": false
+    },
+    {
+      "id": "mdns-8e06f2798f5bea02-local-_spotify-connect-_tcp-local",
+      "ip": "192.168.1.161",
+      "label": "8e06f2798f5bea02.local (spotify-connect)",
+      "properties": {
+        "CPath": "/zc",
+        "VERSION": "1.0",
+        "Stack": "SP"
+      },
+      "host": "8e06f2798f5bea02.local",
+      "service": "_spotify-connect._tcp.local",
+      "medium": "mdns",
+      "port": 56843,
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "mdns-4cd966e6-a1e6-1a15-ea94-338073876799-local-_googlecast-_tcp-local",
+      "ip": "192.168.1.161",
+      "label": "4cd966e6-a1e6-1a15-ea94-338073876799.local (googlecast)",
+      "properties": {
+        "id": "4cd966e6a1e61a15ea94338073876799",
+        "cd": "037D34B1FA09B4E58E11A805BDD6109D",
+        "rm": "F40AC49EBB9C6020",
+        "ve": "05",
+        "md": "onn. Streaming Device 4K pro",
+        "ic": "/setup/icon.png",
+        "fn": "onn. Streaming Device 4K pro",
+        "ca": "266757",
+        "st": "1",
+        "bs": "FA8FDDC6A257",
+        "nf": "1",
+        "ct": "FBCF45",
+        "rr": "233637DE",
+        "rs": "YouTube"
+      },
+      "host": "4cd966e6-a1e6-1a15-ea94-338073876799.local",
+      "service": "_googlecast._tcp.local",
+      "medium": "mdns",
+      "port": 8009,
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "id": "mdns-Android_efadcfece309461b99fe48aad50598de-local-_androidtvremote2-_tcp-local",
+      "ip": "192.168.1.161",
+      "label": "Android_efadcfece309461b99fe48aad50598de.local (androidtvremote2)",
+      "properties": {
+        "bt": "A8:96:09:90:77:BE"
+      },
+      "host": "Android_efadcfece309461b99fe48aad50598de.local",
+      "service": "_androidtvremote2._tcp.local",
+      "medium": "mdns",
+      "port": 6466,
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 4,
+      "is_new": false
+    },
+    {
+      "id": "mdns-linux-local-_spotify-connect-_tcp-local",
+      "ip": "192.168.1.157",
+      "label": "linux.local (spotify-connect)",
+      "properties": {
+        "CPath": "/spotifyConnect"
+      },
+      "host": "linux.local",
+      "service": "_spotify-connect._tcp.local",
+      "medium": "mdns",
+      "port": 4070,
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "active": false,
+      "id": "tail-100-110-107-61",
+      "online": false,
+      "ip": "100.110.107.61",
+      "label": "android-build",
+      "os": "linux",
+      "relay": "ord",
+      "medium": "tailnet",
+      "dns": "android-build.tail7f6073.ts.net.",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "active": false,
+      "id": "tail-100-126-74-43",
+      "online": true,
+      "ip": "100.126.74.43",
+      "label": "Pebble",
+      "os": "android",
+      "relay": "nyc",
+      "medium": "tailnet",
+      "dns": "pebble.tail7f6073.ts.net.",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "active": false,
+      "id": "tail-100-127-18-29",
+      "online": false,
+      "ip": "100.127.18.29",
+      "label": "picass0",
+      "os": "linux",
+      "relay": "ord",
+      "medium": "tailnet",
+      "dns": "picass0.tail7f6073.ts.net.",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "active": false,
+      "id": "tail-100-123-67-80",
+      "online": true,
+      "ip": "100.123.67.80",
+      "label": "localhost",
+      "os": "iOS",
+      "relay": "nyc",
+      "medium": "tailnet",
+      "dns": "ipad-pro-10-5.tail7f6073.ts.net.",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "active": true,
+      "id": "tail-100-83-251-119",
+      "online": true,
+      "ip": "100.83.251.119",
+      "label": "questboard-ec2",
+      "os": "linux",
+      "relay": "ord",
+      "medium": "tailnet",
+      "dns": "questboard-ec2.tail7f6073.ts.net.",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    },
+    {
+      "active": false,
+      "id": "tail-100-104-202-10",
+      "online": false,
+      "ip": "100.104.202.10",
+      "label": "onn",
+      "os": "android",
+      "relay": "nyc",
+      "medium": "tailnet",
+      "dns": "onn.tail7f6073.ts.net.",
+      "first_seen": "2026-05-10T08:24:04.5124762Z",
+      "last_seen": "2026-05-10T16:24:15.3947869Z",
+      "scan_count": 5,
+      "is_new": false
+    }
+  ],
+  "scan_id": 5,
+  "departed_recent": [
+    {
+      "id": "btle-006ad12cf87b",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-0862c8b42047",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-0a3867572178",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-16fd1042d978",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-1725cc8c1114",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "btle-194840e333a8",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "btle-22d62624599d",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-2fc99a185338",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "btle-32b32d3b704b",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-3827e222d94d",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-3aeadcc7ef26",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-3b9da2d70f3d",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-43423a2a1a6a",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-44c5091f48d8",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-458fbb28bf74",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-45efb5625790",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-464dfded44da",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "btle-46ea266ad525",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-4ab9b459be07",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-4c0bfb5053f5",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-4c25f1bc108b",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "btle-4df9dee5f03c",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-4e000214bb5b",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-4ea4a363dfbd",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-4f1d700127cc",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-4fde54e8175f",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-518368bc0e53",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "btle-526197263252",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-55156249862c",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-566c483878a7",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-571d581461de",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-593ac9a6f31b",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "btle-5e790965254f",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-5ed066e0e048",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-5f0d0f33c053",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-605f00ef3817",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-637ab0224d6d",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-646751c67bd0",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-65904469e84c",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-65950efe76d7",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "btle-6868f6052971",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-6a9f5c1e0374",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-6e619632a66e",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-706328782702",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-7393cb7afd3d",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-780349b3c0d4",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-780608d6130e",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-7926565dd9ee",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-79f78ec81f55",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-7af9bbbf0d07",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-7b7ba43b2bf9",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-7be31c571412",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-7c0fde8ed617",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-7cdff1bc97fd",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-7e27440bbeca",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "btle-a00ce290f0cd",
+      "label": "OpenFit Air by Shokz",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-b052161a9d3e",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-bce92f5db4c5",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "btle-c0311e6e9d39",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-c6056d332a40",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "btle-c93e3cef7395",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "btle-cb3239869ced",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "btle-da8b0030bd01",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "btle-e39bfba71808",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "btle-ec7dda78da18",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "btle-ef7aaaba5211",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "btle-f35ff4c7413f",
+      "label": "N074N",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "btle-f506913b300e",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "btle-f850c1e3e147",
+      "label": "<unnamed>",
+      "medium": "btle",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-10:0c:6b:63:9a:6e",
+      "label": "SHNEYDER 2.4",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-1a:3b:f3:3f:08:a9",
+      "label": "Frankie LANning Guest",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-1e:1e:a3:c9:47:e3",
+      "label": "Spectrum Mobile",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-2a:c5:c8:a0:5f:a2",
+      "label": "DIRECT-A2-HP 3101fdw LaserJet",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-34:60:f9:80:07:62",
+      "label": "Libretto",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-34:60:f9:80:07:ce",
+      "label": "Libretto",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-34:98:b5:f5:3c:fc",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-34:98:b5:f5:3d:36",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-34:98:b5:f7:70:0d",
+      "label": "BNest",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-36:5e:08:5a:d5:ec",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-3a:60:f9:80:07:ce",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-3a:98:b5:f5:3c:fa",
+      "label": "BNest",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-3c:bd:c5:4c:32:a0",
+      "label": "Fios-ZJk3p",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-3c:bd:c5:ad:fb:93",
+      "label": "Verizon_47BLV9",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-48:5d:36:94:48:ac",
+      "label": "FiOS-Y71W2",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-50:eb:f6:16:bc:10",
+      "label": "2046",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-50:eb:f6:16:bc:11",
+      "label": "ACDC24TOOL",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-50:eb:f6:16:bc:14",
+      "label": "2046",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-50:eb:f6:16:bc:15",
+      "label": "Room 309",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-58:96:71:f7:e0:cb",
+      "label": "Verizon_6NKLYK",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-5e:96:71:f7:e0:cb",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-62:f8:53:91:5a:1e",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-78:67:0e:72:4d:3c",
+      "label": "Verizon_JZ3WGZ",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-7c:10:c9:58:8d:f4",
+      "label": "R&A 2.0_5G",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-84:1e:a3:c9:47:e7",
+      "label": "SpectrumSetup-E0",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-8a:f8:53:e5:9e:4c",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-8c:3b:ad:ce:23:25",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:24:04.5124762Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-92:bd:c5:4c:32:a2",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-96:3b:ad:ce:23:22",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-a2:ad:9f:1c:8d:f8",
+      "label": "ACDC24TOOL",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:26:04.7850242Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-b2:91:9b:3a:00:e9",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-b2:91:9b:61:21:c9",
+      "label": "<hidden>",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T08:24:37.7143324Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-b8:f8:53:91:5a:1a",
+      "label": "Fios-Pj6cL",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-b8:f8:53:e5:9e:4a",
+      "label": "Fios-Dx8mN",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-b8:f8:53:e5:9e:4b",
+      "label": "Fios-Dx8mN",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    },
+    {
+      "id": "wifi-e8:ad:a6:64:5d:07",
+      "label": "MySpectrumWiFi00-5G",
+      "medium": "wifi-neighbor",
+      "last_seen": "2026-05-10T13:38:16.9656958Z",
+      "departed": true
+    }
+  ],
+  "scan_history": {
+    "total_scans": 5,
+    "this_scan_id": 5
+  }
+};
