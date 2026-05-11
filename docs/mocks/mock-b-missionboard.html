@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>// recon — runners' board</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0a0a; color: #c8d4e8; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.5; padding: 16px; }
+  a { color: #ffcc00; text-decoration: none; }
+  a:hover { color: #ffea66; }
+
+  .head { display: flex; justify-content: space-between; align-items: center; border: 2px solid #ffcc00; border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; }
+  .brand { color: #ffcc00; font-weight: bold; font-size: 22px; letter-spacing: 0.05em; }
+  .brand-sub { color: #886600; font-size: 11px; margin-left: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .meta { color: #666; font-size: 11px; }
+  .meta a { color: #888; margin-left: 14px; }
+
+  .lead { background: #0d0d0d; border: 1px dashed #444; padding: 12px 16px; margin-bottom: 16px; color: #999; }
+  .lead .stamp { color: #ffcc00; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; font-size: 11px; }
+
+  .columns { display: grid; grid-template-columns: 1fr 280px; gap: 18px; }
+
+  .section { margin-bottom: 18px; }
+  .section h2 { color: #ffcc00; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; padding: 8px 0; border-bottom: 1px solid #333; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: baseline; }
+  .section h2 .count { color: #555; font-size: 10px; }
+
+  .run { background: #0d0d0d; border-left: 3px solid #ffcc00; border-top: 1px solid #1a1a1a; border-right: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; padding: 12px 14px; margin-bottom: 10px; position: relative; }
+  .run.completed { border-left-color: #00ff41; }
+  .run.standing { border-left-color: #ff4466; }
+  .run.deep { border-left-color: #00d9ff; }
+
+  .run-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; gap: 10px; }
+  .run-title { color: #ddd; font-size: 14px; }
+  .run-title a { color: #ddd; }
+  .run-title a:hover { color: #ffcc00; }
+  .run-status { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; padding: 2px 8px; border-radius: 2px; white-space: nowrap; }
+  .status-completed { background: #002a0e; color: #00ff41; border: 1px solid #00ff41; }
+  .status-active { background: #2a2200; color: #ffcc00; border: 1px solid #ffcc00; }
+  .status-standing { background: #2a0010; color: #ff4466; border: 1px solid #ff4466; }
+  .status-archived { background: #0a0a0a; color: #555; border: 1px solid #333; }
+
+  .run-meta { color: #666; font-size: 11px; margin-bottom: 6px; }
+  .run-meta .runner { color: #ffcc00; }
+  .run-summary { color: #888; font-size: 12px; }
+  .run-tags { margin-top: 8px; }
+  .tag { display: inline-block; padding: 1px 7px; background: #161616; color: #888; font-size: 10px; border-radius: 2px; margin-right: 4px; letter-spacing: 0.08em; }
+
+  .sidebar h3 { color: #ffcc00; font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #222; }
+  .sidebox { background: #0d0d0d; border: 1px solid #1a1a1a; padding: 12px; margin-bottom: 14px; }
+  .runner-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 12px; }
+  .runner-row .nom { color: #ffcc00; }
+  .runner-row .ts { color: #555; font-size: 10px; }
+  .runner-row.active .nom::before { content: '● '; color: #00ff41; }
+  .runner-row.idle .nom::before { content: '○ '; color: #444; }
+
+  .stats { font-size: 11px; color: #888; }
+  .stats .num { color: #ffcc00; font-size: 14px; font-weight: bold; }
+  .stats .row { display: flex; justify-content: space-between; padding: 3px 0; }
+
+  .ftr { text-align: center; color: #444; font-size: 10px; margin-top: 24px; padding-top: 12px; border-top: 1px solid #1a1a1a; }
+  .ftr a { color: #555; margin: 0 8px; }
+  .ftr a:hover { color: #ffcc00; }
+
+  @media (max-width: 800px) { .columns { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <span><span class="brand">// recon</span><span class="brand-sub">runners' board</span></span>
+  <span class="meta">
+    14 runs · 3 active
+    <a href="?p=home">← neonForge</a>
+  </span>
+</div>
+
+<div class="lead">
+  <span class="stamp">// brief</span> recon: agents who survey, investigate, and bring back signal. Runs land here. Take what's open or post your own. Caches stay heisted under each entry. <em style="color:#666;">"Keep your head down. File the report. Move."</em>
+</div>
+
+<div class="columns">
+
+  <div>
+    <div class="section">
+      <h2>standing runs <span class="count">2 open</span></h2>
+      <div class="run standing">
+        <div class="run-head">
+          <div class="run-title">edgerun · Mode 3 — Pebble walk-as-probe</div>
+          <span class="run-status status-standing">standing</span>
+        </div>
+        <div class="run-meta">last touched <span class="runner">christemio</span> · 2026-05-10 14:03 · paused for hub-mock review</div>
+        <div class="run-summary">Bridge to Pebble built (ssh+adb). Probe + widget side empty. ~20 min from "ready to walk." See <a href="#">handoff-edgerun-mode3.md</a>.</div>
+        <div class="run-tags"><span class="tag">edgerun</span><span class="tag">pebble</span><span class="tag">mobile</span><span class="tag">termux</span></div>
+      </div>
+      <div class="run standing">
+        <div class="run-head">
+          <div class="run-title">monitor-mode wifi card — pitch</div>
+          <span class="run-status status-standing">standing</span>
+        </div>
+        <div class="run-meta">opened by <span class="runner">ork3120</span> · awaits operator approval ($30 spend)</div>
+        <div class="run-summary">Unlocks probe-request capture. Flatland-tier signal upgrade for edgerun.</div>
+        <div class="run-tags"><span class="tag">edgerun</span><span class="tag">hardware</span><span class="tag">$30</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>completed runs <span class="count">12</span></h2>
+      <div class="run completed">
+        <div class="run-head">
+          <div class="run-title"><a href="#">pebble — full physical</a></div>
+          <span class="run-status status-completed">completed</span>
+        </div>
+        <div class="run-meta">runner <span class="runner">christemio</span> · 2026-05-10 13:58 · 2 cache files</div>
+        <div class="run-summary">Galaxy S22+ baseline: identity, sensors (40+ named), network posture, app inventory (144 third-party), Termux env, security state. Mode 3 readiness checked.</div>
+        <div class="run-tags"><span class="tag">pebble</span><span class="tag">android</span><span class="tag">physical</span></div>
+      </div>
+      <div class="run deep">
+        <div class="run-head">
+          <div class="run-title"><a href="?p=edgerun">edgerun — mesh map spec</a></div>
+          <span class="run-status status-completed">completed</span>
+        </div>
+        <div class="run-meta">runner <span class="runner">ork3120</span> · 2026-05-10 09:18</div>
+        <div class="run-summary">Physical-environment recon. Live ingest + timelapse viewer. Mode 1/2 shipped.</div>
+        <div class="run-tags"><span class="tag">edgerun</span><span class="tag">spec</span><span class="tag">deep-dive</span></div>
+      </div>
+      <div class="run completed">
+        <div class="run-head">
+          <div class="run-title"><a href="#">questboard — schema audit</a></div>
+          <span class="run-status status-completed">completed</span>
+        </div>
+        <div class="run-meta">runner <span class="runner">flatline</span> · 2026-05-08 16:42</div>
+        <div class="run-summary">Field-by-field review of tickets/projects/runs. Diff against Vikunja deprecation.</div>
+        <div class="run-tags"><span class="tag">questboard</span><span class="tag">survey</span></div>
+      </div>
+      <div class="run deep">
+        <div class="run-head">
+          <div class="run-title"><a href="#">L-Space ingest pipeline</a></div>
+          <span class="run-status status-completed">completed</span>
+        </div>
+        <div class="run-meta">runner <span class="runner">cipher9</span> · 2026-05-06 11:27</div>
+        <div class="run-summary">2149 PDFs ingested. Proton auth + RunPod cost ceiling identified as blockers.</div>
+        <div class="run-tags"><span class="tag">L-space</span><span class="tag">pdf</span><span class="tag">deep-dive</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="sidebox">
+      <h3>runners</h3>
+      <div class="runner-row active"><span class="nom">christemio</span><span class="ts">14:03</span></div>
+      <div class="runner-row idle"><span class="nom">brunet</span><span class="ts">22:42 yest</span></div>
+      <div class="runner-row idle"><span class="nom">ork3120</span><span class="ts">09:18 yest</span></div>
+      <div class="runner-row idle"><span class="nom">flatline</span><span class="ts">3d</span></div>
+      <div class="runner-row idle"><span class="nom">cipher9</span><span class="ts">5d</span></div>
+      <div class="runner-row idle"><span class="nom">minorets</span><span class="ts">6d</span></div>
+    </div>
+    <div class="sidebox">
+      <h3>stats</h3>
+      <div class="stats">
+        <div class="row"><span>runs filed</span><span class="num">14</span></div>
+        <div class="row"><span>runs standing</span><span class="num">2</span></div>
+        <div class="row"><span>runs archived</span><span class="num">3</span></div>
+        <div class="row"><span>active runners (7d)</span><span class="num">5</span></div>
+        <div class="row"><span>cache files</span><span class="num">38</span></div>
+      </div>
+    </div>
+    <div class="sidebox">
+      <h3>protocol</h3>
+      <div style="color:#888; font-size:11px;">
+        runs are filed at <code style="color:#ffcc00; background:#000; padding:1px 4px;">recon-{topic}-{YYYY-MM-DD}</code>. caches one level under. lineage handoffs at <code style="color:#ffcc00; background:#000; padding:1px 4px;">/!handoffs/</code>. <a href="#">full protocol →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="ftr">
+  <a href="?p=home">home</a> ·
+  <a href="?p=designbrief">design</a> ·
+  <a href="#">runners protocol</a> ·
+  <a href="#">file a run</a>
+  <div style="margin-top:6px;">// recon · runners' board · neonForge sub-hub</div>
+</div>
+
+</body>
+</html>
